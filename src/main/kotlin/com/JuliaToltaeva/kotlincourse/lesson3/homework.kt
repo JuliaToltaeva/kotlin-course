@@ -1,5 +1,7 @@
 package com.juliatoltaeva.com.JuliaToltaeva.kotlincourse.lesson3
 
+import java.time.LocalDate
+
 // Погрузимся в атмосферу "Hackathon Survival"
 // Марафон, где участники пытаются завершить реальный проект в условиях искусственно созданного хаоса
 // (например, часто меняющиеся требования, неожиданные "сбои" в оборудовании)
@@ -13,21 +15,54 @@ package com.juliatoltaeva.com.JuliaToltaeva.kotlincourse.lesson3
 val event: String = "Hackathon Survival"
 
 // Дата проведения
-import java.time.LocalDate
 val data: LocalDate = LocalDate.of(2024, 9, 12)
 
 // Место проведения
+val address: String = "Moscow, Sovetskaya, 1-1"
+
 // Подробный бюджет мероприятия, включая расходы на оборудование, кейтеринг и другие операционные расходы.
+val lazyValue: String by lazy {
+    ""
+}
+
 // Количество участников
+var participants: Int = 0
+    get() = field
+    set (value) {
+        if (value > 0) field += value
+    }
+
 // Длительность хакатона
-// Контактная информация и условия соглашений с поставщиками пищи, оборудования и других услуг.
+var duration: Int = 120 // в минутах
+
+// Контактная информация и условия соглашений с поставщиками пищи, оборудования и других услуг
+lateinit var suppliers: String
+
 // Текущее состояние хакатона (статус)
+lateinit var eventStatus: String
+
 // Список спонсоров
+var sponsors: String = "Microsoft Corporation, SAP, Oracle"
+
 // Бюджет мероприятия
+var eventBudget: Int = 0
+    get() = field
+    set (value) {
+        if (value > 0) field += value
+    }
+
 // Текущий уровень доступа к интернету
+lateinit var internetLevel: String
+
 // Информация о транспортировке оборудования, распределении ресурсов и координации между различными командами поддержки.
+lateinit var support: String
+
 // Количество команд
+var supportTeam: Int = 5
+
 // Перечень задач
+
+
 // План эвакуации
 // Список доступного оборудования
 // Список свободного оборудования
