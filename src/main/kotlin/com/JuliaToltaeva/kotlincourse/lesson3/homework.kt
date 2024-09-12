@@ -10,7 +10,12 @@ package com.juliatoltaeva.com.JuliaToltaeva.kotlincourse.lesson3
 // или запрет доступа на установку при возможности чтения, публичность и приватность данных.
 
 // Название мероприятия
+val event: String = "Hackathon Survival"
+
 // Дата проведения
+import java.time.LocalDate
+val data: LocalDate = LocalDate.of(2024, 9, 12)
+
 // Место проведения
 // Подробный бюджет мероприятия, включая расходы на оборудование, кейтеринг и другие операционные расходы.
 // Количество участников
