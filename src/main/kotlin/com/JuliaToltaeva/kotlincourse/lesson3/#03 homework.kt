@@ -18,56 +18,60 @@ import javax.imageio.ImageIO
 val event: String = "Hackathon Survival"
 
 // Дата проведения
-val data: LocalDate = LocalDate.of(2024, 9, 12)
+var data: LocalDate = LocalDate.of(2024, 9, 12)
 
 // Место проведения
 val address: String = "Moscow, Sovetskaya, 1-1"
 
 // Подробный бюджет мероприятия, включая расходы на оборудование, кейтеринг и другие операционные расходы.
-val lazyValue: String by lazy {
-    ""
-}
+//val lazyValue: String by lazy {
+//    ""
+// }
+//правильно ниже
+private val budget: String = "50000" // приватная переменная, недоступная извне
 
 // Количество участников
-var participants: Int = 0
-    get() = field
-    set (value) {
-        if (value > 0) field += value
-    }
+var participants: Int = 0 // на момент создания мероприятия
+    private set
 
 // Длительность хакатона
-var duration: Int = 120 // в минутах
+var duration: Long = 120*8*60 // в минутах, но принято в секундах или миллисекундах, сложный тип переменной
 
 // Контактная информация и условия соглашений с поставщиками пищи, оборудования и других услуг
-lateinit var suppliers: String
+private lateinit var suppliers: String
 
 // Текущее состояние хакатона (статус)
-lateinit var eventStatus: String
+var eventStatus: String = "Не начат"
 
 // Список спонсоров
 var sponsors: String = "Microsoft Corporation, SAP, Oracle"
 
 // Бюджет мероприятия
-var eventBudget: Int = 0
-    get() = field
-    set (value) {
-        if (value > 0) field += value
-    }
+//var eventBudget: Int = 0
+//    get() = field
+//    set (value) {
+//        if (value > 0) field += value
+//    }
 
 // Текущий уровень доступа к интернету
-lateinit var internetLevel: String
+// lateinit var internetLevel: String
+// правильно ниже
+var internetLevel: Int = 0
 
 // Информация о транспортировке оборудования, распределении ресурсов и координации между различными командами поддержки.
-lateinit var support: String
+private var support: String = ""
 
 // Количество команд
 var supportTeam: Int = 5
 
 // Перечень задач
-var supportTask: String = "Задачи саппорта"
+val supportTask: String = "Задачи саппорта"
+
+// Перечень задач
+val task: String = "Задачи"
 
 // План эвакуации
-val image:BufferedImage = ImageIO.read(File("https://promarket.shop/wa-data/public/site/img/plan-evakuatsii.jpg"))
+val image: BufferedImage = ImageIO.read(File("https://promarket.shop/wa-data/public/site/img/plan-evakuatsii.jpg"))
 
 // Список доступного оборудования
 var equipment: String = ""
@@ -76,19 +80,39 @@ var equipment: String = ""
 var equipmentFree: String = ""
 
 // График питания участников (зависит от поставщика питания, определяемого за неделю до начала)
-
+lateinit var meal: String
 
 // План мероприятий на случай сбоев
-// Список экспертов и жюри
-// Методы и процедуры для сбора отзывов от участников и гостей, включая анонимные опросы и интервью.
-// Политика конфиденциальности
-// Приватные отзывы (фидбэк) участников и зрителей для анализа проблем.
-// Текущая температура в помещении
-// Мониторинг и анализ производительности сетевого оборудования и интернет-соединения.
-// Уровень освещения
-// Лог событий мероприятия
-// Доступность медицинской помощи
+val planB: String = ""
 
+// Список экспертов и жюри
+var experts: String = ""
+
+// Методы и процедуры для сбора отзывов от участников и гостей, включая анонимные опросы и интервью.
+var feedback: String by lazy {
+    ""
+    }
+
+// Политика конфиденциальности
+val privacyPolicy: String = ""
+
+// Приватные отзывы (фидбэк) участников и зрителей для анализа проблем.
+var feedback2: String by lazy {
+    ""
+}
+
+// Текущая температура в помещении
+var temperature2: Int = 25
+
+// Мониторинг и анализ производительности сетевого оборудования и интернет-соединения
+var statusNetwork: String = "OK"
+
+// Уровень освещения
+var switchingOn: Int = 100
+
+// Лог событий мероприятия
+
+// Доступность медицинской помощи
 
 // Планы и процедуры для обеспечения безопасности мероприятия,
 // включая планы эвакуации и протоколы чрезвычайных ситуаций.
@@ -102,7 +126,6 @@ const val NOIZE_MAX: Int = 55
 
 // Индикатор превышения уровня шума в помещениях
 var noize: Int = NOIZE_MAX
-    get() = field
     set(value) {
         if (value >= NOIZE_MAX) field += value
     }
@@ -113,7 +136,6 @@ var format: String = ""
 // Количество свободных мест для отдыха (например, кресел или диванов)
 // сеттер валидирует, чтобы количество не было меньше нуля.
 var capacityFree: Int = 0
-    get() = field
     set(value) {
        if (value > 0) field += value
     }
@@ -135,7 +157,7 @@ var access: String = ""
 var partners: String = ""
 
 // Отчет, включающий фотографии, видео и отзывы, генерируется и становится доступен после завершения мероприятия.
-val lazyValue: String by lazy{
+val report: String by lazy {
     ""
 }
 
@@ -160,7 +182,7 @@ val secretInfo: String = "secret info"
 var specialConditions: String = "Особые условия"
 
 // Общее настроение участников (определяется опросами)
-val lazyValue: String by lazy {
+val mood: String by lazy {
     ""
 }
 
