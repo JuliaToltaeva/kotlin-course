@@ -88,7 +88,7 @@ val planB: String = ""
 var experts: String = ""
 
 // Методы и процедуры для сбора отзывов от участников и гостей, включая анонимные опросы и интервью.
-val feedback: String by lazy {
+val feedbackMethod: String by lazy {
     ""
 }
 
@@ -107,27 +107,30 @@ var temperature2: Int = 25
 var statusNetwork: String = "OK"
 
 // Уровень освещения
-var switchingOn: Int = 100
+var lightningLevel: Int = 100
 
 // Лог событий мероприятия
+private var log: String = ""
 
 // Доступность медицинской помощи
+var medicine: String = ""
 
 // Планы и процедуры для обеспечения безопасности мероприятия,
 // включая планы эвакуации и протоколы чрезвычайных ситуаций.
-val planSOS: String = ""
+private val planSOS: String = ""
 
 // Регистрационный номер мероприятия
-const val numberEvent: String = "13092024"
+const val NUMBER_EVENT: String = "13092024"
 
 // Максимально допустимый уровень шума в помещении хакатона.
-const val NOIZE_MAX: Int = 55
+val noizeMax: Int = 55
 
 // Индикатор превышения уровня шума в помещениях
-var noize: Int = NOIZE_MAX
-    set(value) {
-        if (value >= NOIZE_MAX) field += value
-    }
+//var noizeLevel: Int = noizeMax
+//    set(value) {
+//        if (value >= noizeMax) field += value
+//    }
+var noizeLevel: Boolean = false
 
 // Формат мероприятия (зависит от геополитической обстановки)
 var format: String = ""
