@@ -24,18 +24,20 @@ var data: LocalDate = LocalDate.of(2024, 9, 12)
 val address: String = "Moscow, Sovetskaya, 1-1"
 
 // Подробный бюджет мероприятия, включая расходы на оборудование, кейтеринг и другие операционные расходы.
-//val lazyValue: String by lazy {
+// val budget1: String by lazy {
 //    ""
 // }
-//правильно ниже
+// правильно ниже
 private val budget: String = "50000" // приватная переменная, недоступная извне
 
 // Количество участников
 var participants: Int = 0 // на момент создания мероприятия
-    private set
+    get() = field
+    private set (value) {field = value} // изменение доступно не для всех
 
 // Длительность хакатона
 var duration: Long = 120*8*60 // в минутах, но принято в секундах или миллисекундах, сложный тип переменной
+// Long используется для длительности в секундах и миллисекундах
 
 // Контактная информация и условия соглашений с поставщиками пищи, оборудования и других услуг
 private lateinit var suppliers: String
@@ -44,7 +46,7 @@ private lateinit var suppliers: String
 var eventStatus: String = "Не начат"
 
 // Список спонсоров
-var sponsors: String = "Microsoft Corporation, SAP, Oracle"
+val sponsors: String = "Microsoft Corporation, SAP, Oracle"
 
 // Бюджет мероприятия
 //var eventBudget: Int = 0
@@ -56,19 +58,16 @@ var sponsors: String = "Microsoft Corporation, SAP, Oracle"
 // Текущий уровень доступа к интернету
 // lateinit var internetLevel: String
 // правильно ниже
-var internetLevel: Int = 0
+var internetAccessLevel: Int = 0
 
 // Информация о транспортировке оборудования, распределении ресурсов и координации между различными командами поддержки.
 private var support: String = ""
 
 // Количество команд
-var supportTeam: Int = 5
+var amountTeam: Int = 5
 
 // Перечень задач
-val supportTask: String = "Задачи саппорта"
-
-// Перечень задач
-val task: String = "Задачи"
+val teamTask: String = "Задачи"
 
 // План эвакуации
 val image: BufferedImage = ImageIO.read(File("https://promarket.shop/wa-data/public/site/img/plan-evakuatsii.jpg"))
@@ -89,15 +88,15 @@ val planB: String = ""
 var experts: String = ""
 
 // Методы и процедуры для сбора отзывов от участников и гостей, включая анонимные опросы и интервью.
-var feedback: String by lazy {
+val feedback: String by lazy {
     ""
-    }
+}
 
 // Политика конфиденциальности
 val privacyPolicy: String = ""
 
 // Приватные отзывы (фидбэк) участников и зрителей для анализа проблем.
-var feedback2: String by lazy {
+private val feedbackPrivate: String by lazy {
     ""
 }
 
