@@ -1,6 +1,6 @@
 package com.juliatoltaeva.com.JuliaToltaeva.kotlincourse.lesson4
 
-val myInt: Int? = null // статический метод
+val myInt: Int? = null
 val myLong: Long = Long.MAX_VALUE // вызов статического метода
 val myFloat: Float = Float.MAX_VALUE
 
