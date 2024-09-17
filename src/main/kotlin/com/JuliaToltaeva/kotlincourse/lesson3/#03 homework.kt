@@ -174,11 +174,11 @@ val lazyValue: String by lazy {
 const val CONTACT_SOS: String = "Контактная информация экстренных служб: телефон 112"
 
 //решение Саши ниже
-val secretInfo: String = "secret info"
-    get() {
-        if (isAccessible()) return field
-        else return "Access denied"
-    }
+//val secretInfo: String = "secret info"
+//    get() {
+//        if (isAccessible()) return field
+//        else return "Access denied"
+//    }
 
 // Особые условия для участников с ограниченными возможностями
 var specialConditions: String = "Особые условия"
