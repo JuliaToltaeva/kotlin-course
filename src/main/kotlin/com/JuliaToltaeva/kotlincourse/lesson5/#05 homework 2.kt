@@ -1,9 +1,32 @@
 package com.juliatoltaeva.com.JuliaToltaeva.kotlincourse.lesson5
 
-fun main () {
+fun main() {
 
-    printVolume(10.0)
+    printVolume(7.0)
+    printVolume(null)
 
+    printPrice(null)
+    printPrice(200.0)
+
+    printErrorCheck(null)
+    printErrorCheck(50.0)
+}
+
+
+fun printPrice (price: Double?) {
+    val priceVar = 0.5 / 100 * (price ?: 0.0)
+    val priceConst = 50.0
+    println(priceVar + (price ?: priceConst))
+}
+
+fun printVolume (volumeCurrent: Double?) {
+    val volumeBasic = 10.0
+    val ratio = 0.5
+    println(volumeCurrent ?: (volumeBasic * ratio))
+}
+
+fun printErrorCheck (atmPressure: Double?){
+    atmPressure ?: throw Exception("Ошибка: отсутствуют показания атмосферного давления")
 }
 
 // Оператор элвиса
@@ -18,12 +41,6 @@ fun main () {
 // Задача: Рассчитать предполагаемую интенсивность звука после затухания.
 // Интенсивность звука после затухания пропорциональна начальной интенсивности, умноженной на коэффициент затухания.
 // Если коэффициент затухания неизвестен, использовать стандартное значение 0.5.
-
-fun printVolume (volumeCurrent: Double?) {
-    val volumeBasic = 10.0
-    println(volumeCurrent ?: volumeBasic)
-}
-
 
 // ======
 // Контекст: Клиент оплачивает доставку груза. К стоимости доставки добавляется страховка на груз,
