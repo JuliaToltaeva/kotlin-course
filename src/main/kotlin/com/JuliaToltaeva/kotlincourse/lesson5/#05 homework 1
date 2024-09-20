@@ -62,7 +62,7 @@ true || true && false = true
 
 (var h = 7; h-- > 6) || (8 + 1 == 9) && (3 % 2 != 1)
 (7 > 6) || (9 == 9) && (1 != 1)
-true || true && false = false
+true || true && false = true
 
 ((var i = 5; i++ == 5) || (2 * 2 != 4)) && (10 / 2 == 5)
 ((5 == 5) || (4 != 4)) && (5 == 5)
