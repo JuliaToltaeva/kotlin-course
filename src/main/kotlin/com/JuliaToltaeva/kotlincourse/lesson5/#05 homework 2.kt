@@ -5,11 +5,14 @@ fun main() {
     printVolume(7.0)
     printVolume(null)
 
-    printPrice(null)
     printPrice(200.0)
+    printPrice(null)
 
-    printErrorCheck(null)
     printErrorCheck(50.0)
+    printErrorCheck(null)
+
+//    printErrorCheck1("50.0")
+//    printErrorCheck1(null)
 }
 
 
@@ -28,6 +31,12 @@ fun printVolume (volumeCurrent: Double?) {
 fun printErrorCheck (atmPressure: Double?){
     atmPressure ?: throw Exception("Ошибка: отсутствуют показания атмосферного давления")
 }
+
+// Работа над ошибками
+
+//fun printErrorCheck1 (atmPressure1: String?){
+//    println (atmPressure1 ?: throw Exception("Ошибка: отсутствуют показания атмосферного давления"))
+//}
 
 // Оператор элвиса
 //
