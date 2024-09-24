@@ -3,14 +3,36 @@ package com.juliatoltaeva.com.JuliaToltaeva.kotlincourse.lesson6
 import kotlin.time.times
 
 fun main (){
+    println (getSeason (9))
+    println (getSeason (0))
+    println ("")
 
+//    println (checkPersonAge(2.0))
+//    println (checkPersonAge(1.0))
+//    println ("")
+
+    println (getTransport(10.0))
+    println (getTransport(0.0))
+    println ("")
+
+//    println (getBonuses (3.0))
+//    println (getBonuses (0.0))
+//    println ("")
+
+    println (getDocExtension("doc"))
+    println (getDocExtension("gif"))
+    println ("")
+
+    println (convertTemp(20.0, 'C'))
+    println (convertTemp(0.0, 'A'))
+    println ("")
 }
 
 // Задача 1
 
-fun getSeason (monthNum : Int?): String {
+fun getSeason (monthNum : Int): String {
     return when {
-        (monthNum!! < 1) || (monthNum > 12) -> "Некорректно введен параметр Номер месяца"
+        (monthNum < 1) || (monthNum > 12) -> "Ошибка ввода номера месяца"
         monthNum == 12 -> "Зима"
         monthNum in 1..2 -> "Зима"
         monthNum in 3..5 -> "Весна"
@@ -21,29 +43,29 @@ fun getSeason (monthNum : Int?): String {
 
 // Задача 2
 
-fun checkPersonAge (petAge : Double?): String {
-    return if (petAge!! <= 0.0) {
-        "Ошибка ввода возраста собаки"
+fun checkPersonAge (petAge : Double): String {
+    return if (petAge <= 0.0) {
+        throw Exception("Ошибка ввода возраста собаки")
     } else (if (petAge > 7.0) {
-        "Ошибка ввода возраста собаки"
+        throw Exception("Ошибка ввода возраста собаки")
     } else {
         convertPersonAge(petAge)
     }) as String
 }
 
-fun convertPersonAge (petAge : Double?): Double {
-    return if (petAge!! > 0.0 && petAge < 2.0) {
+fun convertPersonAge (petAge : Double): Double {
+    return if (petAge > 0.0 && petAge < 2.0) {
         10.5 * petAge
     } else {
-        4.0 * petAge
+        (10.5 * petAge + 4.0 * petAge)
     }
 }
 
 // Задача 3
 
-fun getTransport (routeLength: Double?): String {
+fun getTransport (routeLength: Double): String {
     return when {
-        routeLength!! <= 0.0 -> "Ошибка ввода длины маршрута"
+        routeLength <= 0.0 -> "Ошибка ввода длины маршрута"
         (routeLength > 0.0) && (routeLength < 1.0) -> "Пешком"
         (routeLength >= 1.0) && (routeLength < 5.0) -> "Велосипед"
         else -> "Автотранспорт"
@@ -52,9 +74,9 @@ fun getTransport (routeLength: Double?): String {
 
 // Задача 4
 
-fun getBonuses (price: Double?): String {
-    return if (price!! <= 0.0) {
-        "Ошибка ввода суммы покупки"
+fun getBonuses (price: Double): String {
+    return if (price <= 0.0) {
+        throw Exception("Ошибка")
     } else (if (price < 1000.0) {
         convertBonusLess1000 (price)
     } else {
@@ -74,47 +96,47 @@ fun convertBonusMore1000 (price: Double): Double {
 }
 
 // Задача 5
-fun getDocExtension (docExtension: String?): String {
-    return when () {
-        docExtension == null -> "Ошибка"
-        docExtension == "doc" -> "Текстовый документ" // нужно использовать список для "pdf", "rtf", "txt"
-        docExtension == "bmp" -> "Изображение" // "gif", "jpg", "psd", "tif"
-        docExtension == "xlsx" -> "Таблица" //  "ods", "xls"
+fun getDocExtension (docExtension: String): String {
+    return when (docExtension){
+        "doc", "pdf" -> "Текстовый документ" // нужно использовать список для "pdf", "rtf", "txt"
+        "bmp" -> "Изображение" // "gif", "jpg", "psd", "tif"
+        "xlsx" -> "Таблица" //  "ods", "xls"
         else -> "Неизвестный тип"
     }
 }
 
 // Задача 6
 
-fun convertTemp (degree: Double?, unit: Char?): String {
-    return if ((degree == null) || (unit == null)) {
-        "Ошибка: введено некорректное значение или не выбрана единица измерения"
-    } else (if (unit = 'C') {
-        val degreeF: Double = (degree * 9.0/5.0) + 32.0
-        convertCF (degreeF))
-    } else (unit = 'F') {
-        val degreeC: Double = (degree - 32.0) / 1.8
-        convertFC (degreeC)
-    }
+fun convertTemp (degree: Double, unit: Char): String {
+    return if (unit == 'C') {
+        val result: Double = (degree * 9.0/5.0) + 32.0
+        "$result F"
+    } else {
+        val result: Double = (degree - 32.0) / 1.8
+        "$result C"
+    }.toString()
 }
 
-fun convertCF (degreeF: Double?, unit: Char?): String {
-    val unit: Char = 'F'
-    return $result F
-}
-fun convertFC (degreeC: Double?, unit: Char?): String {
-    val unit: Char = 'C'
-    return $result C
-}
 
 // Задача 7
 
-fun chooseClothes (temp: Int?): String {
-    return when () {
-        (temp!! >= 35) || (temp <= -30) -> "рекомендация не выходить из дома"
+fun chooseClothes (temp: Int): String {
+    return when {
+        (temp >= 35) || (temp <= -30) -> "рекомендация не выходить из дома"
         temp in -29..-1 -> "куртка и шапка"
-        temp in 0..15 -> "футболка и шорты"
+        temp in 0..15 -> "ветровка"
         else -> "футболка и шорты"
+    }
+}
+
+// Задача 8
+
+fun chooseFilm (age: Int): String {
+    return when {
+        (age < 0) || (age > 110) -> "ошибка"
+        age in 0..9 -> "детские"
+        age in 10..17 -> "подростковые"
+        else -> "18+"
     }
 }
 
@@ -157,15 +179,3 @@ fun chooseClothes (temp: Int?): String {
 //Контекст: Кинотеатр предлагает фильмы разных возрастных категорий.
 //Напишите функцию, которая принимает возраст зрителя и возвращает доступные для него категории фильмов:
 //"детские", "подростковые", "18+".
-
-fun chooseFilm (age: Int?): String {
-    if (age!! < 0) {
-        "ошибка"
-    } else if (age in 0..9) {
-        "детские"
-    } else if (age in 10..17) {
-        "подростковые"
-    } else if (age >= 18) {
-        "18+"
-    }
-}
