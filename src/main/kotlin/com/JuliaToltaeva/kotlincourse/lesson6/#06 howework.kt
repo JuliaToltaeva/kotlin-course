@@ -73,7 +73,6 @@ fun getTransport (routeLength: Double): String {
 // Задача 4
 
 fun getBonuses (price: Double): String {
-    val bonusLess1000 : Double = (price / 100.0) * 2.0
     return if (price < 0.0) {
         throw Exception ("Ошибка")
     } else (if (price < 1000.0) {
@@ -90,7 +89,7 @@ fun convertBonusLess1000 (price: Double): Double {
 
 fun convertBonusMore1000 (price: Double): Double {
     val bonusLess1000 : Double = (price / 100.0) * 2.0
-    val bonusMore1000 : Double = bonusLess1000 + 2.0 * (price / 100.0 - 10.0)
+    val bonusMore1000 : Double = bonusLess1000 + 4.0 * (price / 100.0 - 10.0)
     return bonusMore1000
 }
 
