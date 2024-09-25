@@ -32,7 +32,7 @@ fun main (){
 
 fun getSeason (monthNum : Int): String {
     return when {
-        (monthNum < 1) || (monthNum > 12) -> "Ошибка ввода номера месяца"
+        monthNum !in 1..12 -> "Ошибка ввода номера месяца"
         monthNum == 12 -> "Зима"
         monthNum in 1..2 -> "Зима"
         monthNum in 3..5 -> "Весна"
@@ -44,20 +44,18 @@ fun getSeason (monthNum : Int): String {
 // Задача 2
 
 fun checkPersonAge (petAge : Double): String {
-    return if (petAge <= 0.0) {
-        throw Exception("Ошибка ввода возраста собаки")
-    } else (if (petAge > 7.0) {
+    return if ((petAge <= 0.0) || (petAge > 7.0)) {
         throw Exception("Ошибка ввода возраста собаки")
     } else {
         convertPersonAge(petAge)
-    }) as String
+    } as String
 }
 
 fun convertPersonAge (petAge : Double): Double {
     return if (petAge > 0.0 && petAge < 2.0) {
         10.5 * petAge
     } else {
-        (10.5 * petAge + 4.0 * petAge)
+        (10.5 * 2 + 4.0 * (petAge-2))
     }
 }
 
@@ -65,7 +63,7 @@ fun convertPersonAge (petAge : Double): Double {
 
 fun getTransport (routeLength: Double): String {
     return when {
-        routeLength <= 0.0 -> "Ошибка ввода длины маршрута"
+        routeLength <= 0.0 -> throw Exception ("Ошибка ввода длины маршрута")
         (routeLength > 0.0) && (routeLength < 1.0) -> "Пешком"
         (routeLength >= 1.0) && (routeLength < 5.0) -> "Велосипед"
         else -> "Автотранспорт"
@@ -75,8 +73,9 @@ fun getTransport (routeLength: Double): String {
 // Задача 4
 
 fun getBonuses (price: Double): String {
-    return if (price <= 0.0) {
-        throw Exception("Ошибка")
+    val bonusLess1000 : Double = (price / 100.0) * 2.0
+    return if (price < 0.0) {
+        throw Exception ("Ошибка")
     } else (if (price < 1000.0) {
         convertBonusLess1000 (price)
     } else {
@@ -85,7 +84,7 @@ fun getBonuses (price: Double): String {
 }
 
 fun convertBonusLess1000 (price: Double): Double {
-    val bonusLess1000 : Double = price / 100.0 * 2.0
+    val bonusLess1000 : Double = (price / 100.0) * 2.0
     return bonusLess1000
 }
 
@@ -98,9 +97,9 @@ fun convertBonusMore1000 (price: Double): Double {
 // Задача 5
 fun getDocExtension (docExtension: String): String {
     return when (docExtension){
-        "doc", "pdf" -> "Текстовый документ" // нужно использовать список для "pdf", "rtf", "txt"
-        "bmp" -> "Изображение" // "gif", "jpg", "psd", "tif"
-        "xlsx" -> "Таблица" //  "ods", "xls"
+        "doc", "pdf", "rtf", "txt" -> "Текстовый документ"
+        "bmp", "gif", "jpg", "psd", "tif" -> "Изображение"
+        "xlsx", "ods", "xls" -> "Таблица"
         else -> "Неизвестный тип"
     }
 }
@@ -117,13 +116,12 @@ fun convertTemp (degree: Double, unit: Char): String {
     }.toString()
 }
 
-
 // Задача 7
 
 fun chooseClothes (temp: Int): String {
     return when {
-        (temp >= 35) || (temp <= -30) -> "рекомендация не выходить из дома"
-        temp in -29..-1 -> "куртка и шапка"
+        (temp > 35) || (temp < -30) -> "рекомендация не выходить из дома"
+        temp in -30 until 0 -> "куртка и шапка"
         temp in 0..15 -> "ветровка"
         else -> "футболка и шорты"
     }
@@ -133,9 +131,9 @@ fun chooseClothes (temp: Int): String {
 
 fun chooseFilm (age: Int): String {
     return when {
-        (age < 0) || (age > 110) -> "ошибка"
+        (age < 0) || (age > 110) -> throw Exception ("ошибка")
         age in 0..9 -> "детские"
-        age in 10..17 -> "подростковые"
+        age in 10 until 18 -> "подростковые"
         else -> "18+"
     }
 }
