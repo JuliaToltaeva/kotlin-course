@@ -15,7 +15,8 @@ fun main() {
 //    println(cycle12())
 //    println(cycle13())
 //    println(cycle14())
-    println(cycle15())
+//    println(cycle15())
+    println(cycle16())
 }
 
 //Задания для Цикла for
@@ -184,12 +185,18 @@ fun cycle15(): String {
 ////Напишите цикл while, который выводит числа от 1 до 10, но пропускает числа, кратные 3.
 
 fun cycle16(): String {
-    var counter5 = 1
-    while (counter5 <= 10) {
-        if (counter5%3 = 0) {
-            print(counter5++)
+    var count = 1
+    while (count <= 10) {
+        if (count < 3) {
+            count++
             continue
+        } else {
+            if (count % 3 == 0) {
+                print(count)
+                print(" ")
+            }
         }
+        count++
     }
     return (" ")
 }
