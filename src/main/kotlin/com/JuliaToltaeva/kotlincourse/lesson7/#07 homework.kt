@@ -174,7 +174,7 @@ return (" ")
 
 fun cycle15(): String {
     for (i in 1..10) {
-        if (i%2 == 0) {
+        if (i % 2 == 0) {
             print(i)
             print(" ")
             continue
@@ -186,18 +186,18 @@ fun cycle15(): String {
 ////Напишите цикл while, который выводит числа от 1 до 10, но пропускает числа, кратные 3.
 
 fun cycle16(): String {
-    var count = 1
-    while (count <= 10) {
-        if (count < 3) {
-            count++
+    var counterX = 1
+    while (counterX <= 10) {
+        if (counterX < 3) {
+            counterX++
             continue
         } else {
-            if (count % 3 == 0) {
-                print(count)
+            if (counterX % 3 == 0) {
+                print(counterX)
                 print(" ")
             }
         }
-        count++
+        counterX++
     }
     return (" ")
 }
@@ -213,7 +213,7 @@ fun cycle16(): String {
 fun superCycle(): String{
     for (i in 1..10) {
         for (k in 1..10) {
-            print(i*k)
+            print(i * k)
             print(" ")
         }
         println(" ")
