@@ -17,7 +17,7 @@ fun main() {
 //    println(cycle14())
 //    println(cycle15())
 //    println(cycle16())
-    println(supercycle())
+    println(superCycle())
 }
 
 //Задания для Цикла for
@@ -210,7 +210,7 @@ fun cycle16(): String {
 //После вложенного цикла выводить пустой println() чтобы следующий проход начинать с новой строки.
 //Результат должен быть как на картинке.
 
-fun supercycle(): String{
+fun superCycle(): String{
     for (i in 1..10) {
         for (k in 1..10) {
             print(i*k)
