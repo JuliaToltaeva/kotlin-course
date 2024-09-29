@@ -6,9 +6,14 @@ fun main () {
 //    println(changeString03("Произошла катастрофа на сервере"))
 //    println(changeString04("Этот код работает без проблем"))
 //    println(changeString05("Удача"))
-    println(getData("Пользователь вошел в систему -> 2021-12-01 09:48:23"))
-    println(getTime("Пользователь вошел в систему -> 2021-12-01 09:48:23"))
 
+//    val string = "Пользователь вошел в систему -> 2021-12-01 09:48:23"
+//    println(getData(string))
+//    println(getTime(string))
+
+//    println(maskPersonalData("4539 1488 0343 6467"))
+
+    println(formatEMail("username@example.com"))
 
 
 }
@@ -92,9 +97,19 @@ fun getTime (string: String): String {
 //Описание: Дана строка с номером кредитной карты "4539 1488 0343 6467".
 //Замаскируйте все цифры, кроме последних четырех, символами "*".
 
+fun maskPersonalData (num: String): String{
+    return "**** **** **** ${num.split(" ")[3]}"
+}
+
 //Задание 3: Форматирование Адреса Электронной Почты. Используй replace
 //Описание: У вас есть электронный адрес "username@example.com".
 //Преобразуйте его в строку "username [at] example [dot] com".
+
+fun formatEMail (email: String): String{
+    val email1 = email.replace("@"," [at] ")
+    val email2 = email1.replace(".", " [dot] ")
+    return(email2)
+}
 
 //Задание 4: Извлечение Имени Файла из Пути
 //Описание: Дан путь к файлу "C:/Пользователи/Документы/report.txt". Извлеките название файла с расширением.
