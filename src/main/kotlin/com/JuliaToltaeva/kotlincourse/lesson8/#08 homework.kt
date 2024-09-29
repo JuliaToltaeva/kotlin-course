@@ -13,7 +13,10 @@ fun main () {
 
 //    println(maskPersonalData("4539 1488 0343 6467"))
 
-    println(formatEMail("username@example.com"))
+//    println(formatEMail("username@example.com"))
+
+//    println(getFileName("C:/Пользователи/Документы/report.txt"))
+    println(makeAbbrev("Объектно-ориентированное программирование"))
 
 
 }
@@ -114,10 +117,31 @@ fun formatEMail (email: String): String{
 //Задание 4: Извлечение Имени Файла из Пути
 //Описание: Дан путь к файлу "C:/Пользователи/Документы/report.txt". Извлеките название файла с расширением.
 
+fun getFileName (path: String): String{
+    val fileName = path.split("/")[3]
+    return(fileName)
+}
+
 //Задание 5: Создание Аббревиатуры из Фразы. Используй split с набором символов для разделения.
 //Используй for для перебора слов. Используй var переменную для накопления первых букв.
 //Описание: У вас есть фраза, например "Объектно-ориентированное программирование".
 // Создайте аббревиатуру из начальных букв слов (например, "ООП").
+
+fun makeAbbrev (text: String): String{
+    val textDelimeters = text.split(" ", "-")
+    var abbrev: String = ""
+
+//    val char0 = textDelimeters[0].substring(0,1)
+//    val char1 = textDelimeters[1].substring(0,1)
+//    val char2 = textDelimeters[2].substring(0,1)
+//    return("$char0$char1$char2")
+
+    for (i in 0..2) {
+        val char = textDelimeters[i].substring(0, 1)
+        abbrev = "$abbrev$char"
+    }
+    return (abbrev.uppercase())
+}
 
 //Дополнительные задания
 //Написать метод, который преобразует строку из нескольких слов в строку,
