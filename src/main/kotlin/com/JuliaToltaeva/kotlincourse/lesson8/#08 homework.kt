@@ -1,22 +1,27 @@
 package com.juliatoltaeva.com.JuliaToltaeva.kotlincourse.lesson8
 
 fun main () {
-//    println(changeString01("Это невозможно выполнить за один день"))
-//    println(changeString02("Я не уверен в успехе этого проекта"))
-//    println(changeString03("Произошла катастрофа на сервере"))
-//    println(changeString04("Этот код работает без проблем"))
-//    println(changeString05("Удача"))
+    println(changeString01("Это невозможно выполнить за один день"))
+    println(changeString02("Я не уверен в успехе этого проекта"))
+    println(changeString03("Произошла катастрофа на сервере"))
+    println(changeString04("Этот код работает без проблем"))
+    println(changeString05("Удача"))
 
-//    val string = "Пользователь вошел в систему -> 2021-12-01 09:48:23"
-//    println(getData(string))
-//    println(getTime(string))
+    val string = "Пользователь вошел в систему -> 2021-12-01 09:48:23"
+    println(getData(string))
+    println(getTime(string))
 
-//    println(maskPersonalData("4539 1488 0343 6467"))
-//    println(formatEMail("username@example.com"))
-//    println(getFileName("C:/Пользователи/Документы/report.txt"))
-//    println(makeAbbrev("Объектно-ориентированное программирование"))
+    println(maskPersonalData("4539 1488 0343 6467"))
+    println(formatEMail("username@example.com"))
+    println(getFileName("C:/Пользователи/Документы/report.txt"))
+    println(makeAbbrev("Объектно-ориентированное программирование"))
 
     println(getString("Юля классная девушка"))
+
+    println(encrypt("KotlinF"))
+    println(decrypt("oKltni0F"))
+
+    getTable(9)
 
 }
 
@@ -163,17 +168,56 @@ fun getString (stringIn: String): String{
     return (stringOut.substring(1))
 }
 
-
-
 //Написать шифратор/дешифратор для строки. Шифровка производится путём замены двух соседних букв между собой:
-// Kotlin шифруется в oKltni. Дешифровка выполняется аналогично. Если длина строки - нечётная, в конец добавляется символ пробела до начала шифрования. Таким образом все шифрованные сообщения будут с чётной длинной. Должно получиться два публичных метода: encrypt() и decrypt() которые принимают и возвращают строку.
+//Kotlin шифруется в oKltni. Дешифровка выполняется аналогично.
+//Если длина строки - нечётная, в конец добавляется символ пробела до начала шифрования.
+//Таким образом все шифрованные сообщения будут с чётной длинной.
+//Должно получиться два публичных метода: encrypt() и decrypt() которые принимают и возвращают строку.
 
+fun encrypt (string: String): String {
+    var stringOut = ""
+    val stringAmountEvenNum = string.length % 2
+    val length = string.length
+    if (stringAmountEvenNum == 0) {
+        for (i in 0..<length step 2) {
+            val char0 = string.substring(i + 1, i + 2)
+            val char1 = string.substring(i, i + 1)
+            val char01 = "$char0$char1"
+            stringOut = "$stringOut$char01"
+        }
+    }
+    else {
+        for (i in 0..length - 2 step 2) {
+            val char0 = string.substring(i + 1, i + 2)
+            val char1 = string.substring(i, i + 1)
+            val char01 = "$char0$char1"
+            stringOut = "$stringOut$char01"
+        }
+        val charEnd = string.substring(length-1)
+        val charEnd0 = "0"
+        val charEndEnd0 = "$charEnd0$charEnd"
+        stringOut = "$stringOut$charEndEnd0"
+    }
+    return(stringOut)
+}
 
+fun decrypt (string: String): String {
+    var stringIn = ""
+    val length = string.length
+
+    for (i in 0..<length step 2) {
+        val char0 = string.substring(i + 1, i + 2)
+        val char1 = string.substring(i, i + 1)
+        val char01 = "$char0$char1"
+        stringIn = "$stringIn$char01"
+    }
+
+    stringIn.replace("0","")
+    return(stringIn)
+}
 
 //Таблица с примерами форматирования строк
 //https://docs.google.com/spreadsheets/d/11hRZpqELzL35UCwQoZioEzK1f1FTYrSRj_lh-14rzXA/edit?usp=drive_link
-
-
 
 //Таблица умножения
 //Вывести таблицу умножения в консоль так, чтобы были ровные строки и столбцы. В заголовках столбцов и строк -
@@ -184,3 +228,29 @@ fun getString (stringIn: String): String{
 //Результат должен выглядеть как на скриншоте.
 //Для усложнения задачи, можно в метод передавать размерность таблицы по вертикали и горизонтали и
 //динамически рассчитывать количество пробелов для форматирования.
+
+fun getTable(limit: Int): String {
+    // первая строка
+    print(" ")
+    for (i in 1..limit) {
+        print(String.format("%3s", i))
+    }
+    // перенос строки
+    println(" ")
+    //
+    for (i in 1..limit) {
+        print("$i ")
+        for (k in 1..limit) {
+            val multy = (i * k).toString()
+            if (multy.length <= 1) {
+                print(String.format("%2s", multy))
+                print(" ")
+
+            } else if(multy.length == 2){
+                print("$multy ")
+            }
+        }
+        println(" ")
+    }
+    return("")
+}
