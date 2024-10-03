@@ -1,17 +1,37 @@
 package com.juliatoltaeva.com.JuliaToltaeva.kotlincourse.lesson9
 
 fun main (){
-    BirthDay(31, "не женат")
+    BirthDay(31, "женат")
 }
 
 fun BirthDay(age: Int, status: String): String {
     println("Привет, Саша Молокович!")
     println("\uD83C\uDF89\uD83C\uDF89\uD83C\uDF89 С прошедшим днем рождения!!! \uD83C\uDF82\uD83C\uDF82\uD83C\uDF82")
-    println("\nТы утверждаешь, что твой возраст $age лет и статус <$status>.")
+    println("\nТвой возраст $age и статус <$status>.")
 
     val ageWow50 = "Да ну нафиг, не может быть, что тебе столько лет!"
     val ageLess18 = "Ну и не говори правдивый возраст!"
     val ageLess30 = "Хорошо сохранился!"
+
+    println("\n<Саша, Саша, поздравляю>, -")
+    println("Все писали в общий чат,")
+    println("<Наконец-то без задания")
+    println("На дом мы остались так!>, –")
+
+    println("\nМожет это совпадение,")
+    println("Может так произошло.")
+    println("Пушить в сашин день рождения")
+    println("Не хочу, а вот вино...")
+
+    println("\n...Я бы попила бокальчик")
+    println("Чтоб забыть восьмой урок,")
+    println("Но взяла себе пивасик –")
+    println("Стало на душе тепло.")
+
+    println("\nХорошо, когда на праздник")
+    println("Ничего не пушишь ты,")
+    println("Хорошо, когда пивасик")
+    println("Можно взять на лессоны.\n")
 
     return when {
         age < 18 -> println(ageLess18).toString()
