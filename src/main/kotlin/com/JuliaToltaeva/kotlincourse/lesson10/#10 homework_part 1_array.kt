@@ -26,7 +26,7 @@ fun main() {
     val array3 = Array(5) { 0.0 }
 
     for (i in array3.indices) {
-        array3[i] = (i * i).toDouble()
+        array3[i] = (i * 2).toDouble()
     }
 
     println("\n\nЗадание 3:")
