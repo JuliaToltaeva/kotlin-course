@@ -83,7 +83,7 @@ fun main() {
 
     val list91 = listOf("a", "b", "c", "d", "e")
     val list92 = listOf("0", "1", "c", "1", "0")
-    val listNew9 = mutableListOf("")
+    val listNew9 = mutableListOf<String>()
 
     for (i in list91) {
         listNew9.add(i)
@@ -99,33 +99,22 @@ fun main() {
 //Задание 10: Нахождение Минимального/Максимального Элемента
 //Создайте список целых чисел и найдите в нем минимальный и максимальный элементы используя цикл.
 
-    val list10 = listOf(1, 3, 5, 7, 9)
-    var maxNum = 0
-    var minNum = 0
+    val list10 = listOf(1, 3, 2, 7, 9)
+    var maxNum = list10[0]
+    var minNum = list10[0]
 
     for (i in list10.indices) {
-        if (list10[i] == list10.lastIndex){
-            break
-            } else {
-            when {
-                (list10[i] > (list10[i + 1])) ->
-                    when {
-                        list10[i] > maxNum -> maxNum = list10[i]
-                        else -> continue
-                    }
-
-                else ->
-                    when {
-                        list10[i] > minNum -> continue
-                        else -> minNum = list10[i]
-                    }
-            }
+        if (i == list10.lastIndex) {
+            print("")
+        } else {
+            maxNum = maxOf(list10[i], list10[i + 1])
+            minNum = minOf(list10[i], list10[i + 1])
         }
+    }
 
         println("\n\nЗадание 10:")
         println("max: $maxNum")
         println("min: $minNum")
-        // не работает- ошибка
 
 //Задание 11: Фильтрация Списка
 //Имея список целых чисел, создайте новый список, содержащий только четные числа из исходного списка используя цикл.
@@ -139,8 +128,7 @@ fun main() {
             }
         }
 
-        println("\n\nЗадание 11:")
+        println("\nЗадание 11:")
         print(listNew11)
-
-    }
 }
+
