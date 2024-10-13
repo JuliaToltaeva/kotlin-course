@@ -52,7 +52,7 @@ fun main() {
     println(processList(procList))
 
     println("\ndrawRectangle")
-    println(drawRectangle(2,2))
+    println(drawRectangle(7,7))
 }
 
 //Напиши валидную сигнатура метода
@@ -185,19 +185,20 @@ fun processList(procList: List<String?>) : String?{
 //Сначала сделай запуск функции и посмотри на результат её работы.
 //Сделай запуск после рефакторинга и проверь, чтобы результат работы был аналогичным.
 
-fun drawRectangle(width: Int, height: Int) {
-    if (width <= 0) throw IllegalArgumentException("width должно быть положительным и больше нуля")
-    if (height <= 0) throw IllegalArgumentException("height должно быть положительным и больше нуля")
+private fun checkSize(size: Int, name: String){
+    if (size <= 0) throw IllegalArgumentException("$name должно быть положительным и больше нуля")
+}
 
-    // Верхняя граница
-    var topLine = "+"
+private fun makeHorizontalLine(width: Int){
+    var line = "+"
     for (i in 1 until width - 1) {
-        topLine += "-"
+        line += "-"
     }
-    topLine += "+\n"
-    print(topLine)
+    line += "+\n"
+    print(line)
+}
 
-    // Боковые границы
+private fun verticalLine(height: Int, width: Int){
     for (i in 1 until height - 1) {
         var middleLine = "|"
         for (j in 1 until width - 1) {
@@ -206,12 +207,18 @@ fun drawRectangle(width: Int, height: Int) {
         middleLine += "|\n"
         print(middleLine)
     }
+}
+
+fun drawRectangle(width: Int, height: Int) {
+    checkSize(width, "width")
+    checkSize(height, "height")
+
+    // Верхняя граница
+    makeHorizontalLine(width)
+
+    // Боковые границы
+    verticalLine(height, width)
 
     // Нижняя граница
-    var bottomLine = "+"
-    for (i in 1 until width - 1) {
-        bottomLine += "-"
-    }
-    bottomLine += "+\n"
-    print(bottomLine)
+    makeHorizontalLine(width)
 }
