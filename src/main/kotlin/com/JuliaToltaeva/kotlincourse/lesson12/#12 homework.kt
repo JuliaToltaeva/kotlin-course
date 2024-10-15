@@ -3,8 +3,8 @@ package com.juliatoltaeva.com.JuliaToltaeva.kotlincourse.lesson12
 fun main() {
 
     val list = listOf(1, 2, -1, 3, 4, 5)
-    val list7 = listOf(1, 2, 3, 4, 5, null)
-    val procList = listOf("1", "2", null, "3" )
+    val list7 = listOf(1, 2, 3, 4, 5)
+    val procList = listOf("1", "2", "3" )
 
     println("Задание 1:")
     println(function1())
@@ -20,6 +20,7 @@ fun main() {
 
     println("\nЗадание 5:")
     println(function5("длина строки 15"))
+    println(function5(""))
 
     println("\nЗадание 6:")
     println(function6())
@@ -43,6 +44,7 @@ fun main() {
     println(isEven(5))
 
     println("\nprintNumbersUntil:")
+    println(printNumbersUntil(-1))
     println(printNumbersUntil(3))
 
     println("\nfindFirstNegative:")
@@ -62,7 +64,7 @@ fun function1() = Unit
 
 //Напишите сигнатуру функции, которая принимает два целых числа и возвращает их сумму.
 
-fun function2(a: Int, b: Int): Int{
+fun function2(a: Int, b: Int): Int {
     return(a + b)
 }
 
@@ -72,9 +74,9 @@ fun function3(string: String) = Unit
 
 //Напишите сигнатуру функции, которая принимает список целых чисел и возвращает среднее значение типа Double.
 
-fun function4(list: List<Int>): Double{
+fun function4(list: List<Int>): Double {
     var sum = 0
-    for (i in list.indices){
+    for (i in list.indices) {
         sum += list[i]
     }
     val average = (sum / (list.lastIndex + 1)).toDouble()
@@ -85,7 +87,8 @@ fun function4(list: List<Int>): Double{
 
 fun function5(string5: String) : Int? {
     val length = string5.length
-    return length
+    return if (length > 0) length
+    else null
 }
 
 //Напишите сигнатуру функции, которая не принимает аргументов и возвращает nullable вещественное число.
@@ -97,18 +100,18 @@ fun function6() : Float? {
 
 //Напишите сигнатуру функции, которая принимает nullable список целых чисел и не возвращает значения.
 
-fun function7(list7: List<Int?>) = Unit
+fun function7(list7: List<Int>?) = Unit
 
 //Напишите сигнатуру функции, которая принимает целое число и возвращает nullable строку.
 
-fun function8(a: Int): String?{
+fun function8(a: Int): String? {
     val string = null
     return string
 }
 
 //Напишите сигнатуру функции, которая не принимает аргументов и возвращает список nullable строк.
 
-fun function9(): List<String?>{
+fun function9(): List<String?> {
     val list = listOf("1", "2", "3", null)
     return list
 }
@@ -116,7 +119,7 @@ fun function9(): List<String?>{
 //Напишите сигнатуру функции, которая принимает nullable строку и nullable целое число и возвращает nullable
 //булево значение.
 
-fun function10(string: String?, int: Int?): Boolean?{
+fun function10(string: String?, int: Int?): Boolean? {
     val a = null
     return a
 }
@@ -126,42 +129,34 @@ fun function10(string: String?, int: Int?): Boolean?{
 //Задача 1:
 //Напишите функцию multiplyByTwo, которая принимает целое число и возвращает его, умноженное на 2.
 
-fun multiplyByTwo(int: Int): Int{
-    return int * 2
-}
+fun multiplyByTwo(int: Int) = int * 2
 
 //Задача 2:
 //Создайте функцию isEven, которая принимает целое число и возвращает true, если число чётное,
 //и false в противном случае.
 
-fun isEven(int: Int): Boolean{
-    if (int % 2 == 0) return true
-    else return false
-}
+fun isEven(int: Int) = (int % 2 == 0)
 
 //Задача 3:
 //Напишите функцию printNumbersUntil, которая принимает целое число n и выводит на экран числа от 1 до n.
 //Если число n меньше 1, функция должна прекратить выполнение с помощью return без вывода сообщений.
 
-fun printNumbersUntil(n: Int): MutableList<Int> {
-    val list = mutableListOf<Int>()
+fun printNumbersUntil(n: Int) {
     if (n >= 1) {
-        for (i in 0..<n) {
-            val i = i + 1
-            list.add(i)
+        for (i in 1..n) {
+            print("$i ")
         }
-    }
-    return list
+    } else return
 }
 
 //Задача 4:
 //Создайте функцию findFirstNegative, которая принимает список целых чисел и возвращает первое отрицательное
 //число в списке. Если отрицательных чисел нет, функция должна вернуть null.
 
-fun findFirstNegative(list: List<Int>): Int?{
-    for (i in list.indices){
-        if (list[i] <= 0) {
-            return list[i]}
+fun findFirstNegative(list: List<Int>): Int? {
+    for (i in list) {
+        if (i <= 0) {
+            return i}
         }
     return null
 }
@@ -171,11 +166,11 @@ fun findFirstNegative(list: List<Int>): Int?{
 //Функция должна проходить по списку и выводить каждую строку. Если встречается null значение,
 //функция должна прекратить выполнение с помощью return без возврата значения.
 
-fun processList(procList: List<String?>) : String?{
-    for (i in procList.indices){
-        if (procList[i] == null) {
+fun processList(procList: List<String?>) : String? {
+    for (i in procList) {
+        if (i == null) {
             return null}
-        else println(procList[i])
+        else println(i)
     }
     return "Конец"
 }
@@ -185,11 +180,11 @@ fun processList(procList: List<String?>) : String?{
 //Сначала сделай запуск функции и посмотри на результат её работы.
 //Сделай запуск после рефакторинга и проверь, чтобы результат работы был аналогичным.
 
-private fun checkSize(size: Int, name: String){
+private fun checkSize(size: Int, name: String) {
     if (size <= 0) throw IllegalArgumentException("$name должно быть положительным и больше нуля")
 }
 
-private fun makeHorizontalLine(width: Int){
+private fun makeHorizontalLine(width: Int) {
     var line = "+"
     for (i in 1 until width - 1) {
         line += "-"
@@ -198,7 +193,7 @@ private fun makeHorizontalLine(width: Int){
     print(line)
 }
 
-private fun verticalLine(height: Int, width: Int){
+private fun verticalLine(height: Int, width: Int) {
     for (i in 1 until height - 1) {
         var middleLine = "|"
         for (j in 1 until width - 1) {
