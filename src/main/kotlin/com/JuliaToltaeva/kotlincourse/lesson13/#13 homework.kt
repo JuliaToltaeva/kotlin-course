@@ -142,9 +142,10 @@ fun main() {
     println("\nTask 4")
     println(createCatalogByFirstLetter(list4))
 
+    val result5 = calcAverageLengthOfWords(list4).toFloat()
+
     println("\nTask 5")
-//    println(calcAverageLengthOfWords(list4))
-//    work but error
+    println("%.2f".format(result5))
 
     println("\nTask 6")
     println(numCategorization(numbers))
@@ -221,8 +222,8 @@ fun calcAverageLengthOfWords(list4: List<String>): Float {
     val lengthElem= list4.map { it.length }
     val lengthSum = lengthElem.sum()
     val lengthAverage = (lengthSum / list4.size).toFloat()
-    return "%.2f".format(lengthAverage).toFloat()
-} // work but error
+    return lengthAverage
+}
 
 //Задание 6: Категоризация чисел.
 //Начальные значения: val numbers = listOf(1, 3, 5, 7, 3, 1, 8, 9, 9, 7)
