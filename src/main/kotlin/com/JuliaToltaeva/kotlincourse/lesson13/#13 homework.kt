@@ -190,7 +190,9 @@ fun charOfNumCollect(listNum2: List<Int>): String {
 //и взять первые 3.
 
 fun analysisOfEduAsses(grades: List<Int>): List<Int> {
-    return grades.filter { it >= 60 }.sorted().take(3)
+    return grades.filter { it >= 60 }
+        .sorted()
+        .take(3)
 }
 
 //Задание 4: Создание каталога по первой букве.
@@ -231,7 +233,7 @@ fun calcAverageLengthOfWords(list4: List<String>): Float {
 
 fun numCategorization(numbers: List<Int>): String {
     val numbersFilter = numbers.distinct()
-        .sorted()
+        .sortedDescending()
     val numbersFinal = numbersFilter.groupBy {
         if (it % 2 == 0) "четные"
         else "нечетные"
@@ -245,6 +247,7 @@ fun numCategorization(numbers: List<Int>): String {
 //преобразовать его к строке, или вернуть сообщение "Подходящий возраст не найден".
 
 fun getFirstElement(ages: List<Int?>): String {
-    val elem = ages.firstOrNull { it != null && it > 18 }
+    val elem = ages.filterNotNull()
+        .firstOrNull { it > 18 }
     return elem?.toString() ?: "Подходящий возраст не найден"
 }
