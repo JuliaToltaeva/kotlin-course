@@ -94,10 +94,10 @@ fun main() {
     val collect7 = list2.sortedDescending()
 
 //Распечатать квадраты элементов списка
-    val collect8 = list.forEach {  println(it * it) }
+    val collect8 = list.forEach { println(it * it) }
 
 //Группировать список по первой букве слов
-    val collect9 = list2.groupBy{ it.substring(0) }
+    val collect9 = list2.groupBy { it.substring(0) }
 
 //Очистить список от дублей
     val collect10 = list2.distinct()
@@ -111,14 +111,14 @@ fun main() {
     val grades = listOf(85, 58, 90, 74, 88, 67, 95, 92, 50, 42, 12)
 
     val list4 = listOf(
-    "Стол", "табурет", "ваза", "Кружка", "Зеркало", "ковер", "Шкаф", "часы", "Люстра",
-    "подушка", "Картина", "столик", "Вазон", "шторы", "Пуф", "книга", "Фоторамка",
-    "светильник", "Коврик", "вешалка", "Подставка", "телевизор", "Комод", "полка",
-    "Абажур", "диван", "Кресло", "занавеска", "Бра", "пепельница", "Глобус", "статуэтка",
-    "Поднос", "фигурка", "Ключница", "плед", "Тумба", "игрушка", "Настенные часы",
-    "подсвечник", "Журнальный столик", "сувенир", "Корзина для белья", "посуда",
-    "Настольная лампа", "торшер", "Этажерка"
-)
+        "Стол", "табурет", "ваза", "Кружка", "Зеркало", "ковер", "Шкаф", "часы", "Люстра",
+        "подушка", "Картина", "столик", "Вазон", "шторы", "Пуф", "книга", "Фоторамка",
+        "светильник", "Коврик", "вешалка", "Подставка", "телевизор", "Комод", "полка",
+        "Абажур", "диван", "Кресло", "занавеска", "Бра", "пепельница", "Глобус", "статуэтка",
+        "Поднос", "фигурка", "Ключница", "плед", "Тумба", "игрушка", "Настенные часы",
+        "подсвечник", "Журнальный столик", "сувенир", "Корзина для белья", "посуда",
+        "Настольная лампа", "торшер", "Этажерка"
+    )
 
     val numbers = listOf(1, 3, 5, 7, 3, 1, 8, 9, 9, 7)
 
@@ -176,10 +176,10 @@ fun charOfNumCollect(listNum2: List<Int>): String {
         listNum2[0] == 0 -> "Стартовая"
         listNum2.sum() > 10000 -> "Массивная"
         listNum2.average() == 10.0 -> "Сбалансированная"
-        listNum2.joinToString ( "" ).length == 20  -> "Клейкая"
+        listNum2.joinToString("").length == 20 -> "Клейкая"
         listNum2.max() < -10 -> "Отрицательная"
         listNum2.min() > 1000 -> "Положительная"
-        listNum2.contains(3) && listNum2.contains(14)-> "Пи***тая"
+        listNum2.contains(3) && listNum2.contains(14) -> "Пи***тая"
         else -> "Уникальная"
     }
 }
@@ -189,8 +189,8 @@ fun charOfNumCollect(listNum2: List<Int>): String {
 //Цель: Отфильтровать удовлетворительные оценки (>=60), отсортировать оставшиеся по возрастанию
 //и взять первые 3.
 
-fun analysisOfEduAsses (grades: List<Int>): List<Int> {
-    return grades.filter{ it >= 60 }.sorted().take(3)
+fun analysisOfEduAsses(grades: List<Int>): List<Int> {
+    return grades.filter { it >= 60 }.sorted().take(3)
 }
 
 //Задание 4: Создание каталога по первой букве.
@@ -219,9 +219,8 @@ fun createCatalogByFirstLetter(list4: List<String>): Map<String, List<String>> {
 ////Вывести форматированный текст с двумя знаками после запятой.
 
 fun calcAverageLengthOfWords(list4: List<String>): Float {
-    val lengthElem= list4.map { it.length }
-    val lengthSum = lengthElem.sum()
-    val lengthAverage = (lengthSum / list4.size).toFloat()
+    val lengthElem = list4.map { it.length }
+    val lengthAverage = lengthElem.average().toFloat()
     return lengthAverage
 }
 
@@ -230,7 +229,7 @@ fun calcAverageLengthOfWords(list4: List<String>): Float {
 //Цель: Отобрать уникальные числа, отсортировать по убыванию и сгруппировать по четности
 //(“четные” и “нечетные”).
 
-fun numCategorization (numbers: List<Int>): String {
+fun numCategorization(numbers: List<Int>): String {
     val numbersFilter = numbers.distinct()
         .sorted()
     val numbersFinal = numbersFilter.groupBy {
@@ -246,6 +245,6 @@ fun numCategorization (numbers: List<Int>): String {
 //преобразовать его к строке, или вернуть сообщение "Подходящий возраст не найден".
 
 fun getFirstElement(ages: List<Int?>): String {
-    val elem = ages.firstOrNull { it!= null && it > 18 }
+    val elem = ages.firstOrNull { it != null && it > 18 }
     return elem?.toString() ?: "Подходящий возраст не найден"
 }
