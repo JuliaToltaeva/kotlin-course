@@ -179,12 +179,12 @@ fun main() {
 //    идентификаторы которых соответствуют определённой версии тестов.
 
     val testCases = mapOf(
-        "Test_PRC-127" to "Passed",
-        "Test_PRC-128" to "Failed",
-        "Test_PRC-129" to "Passed",
-        "Test_PRC-130" to "Skipped",
-        "Test_PRC-131" to "Failed",
-        "Test_PRC-131 optional" to "Failed"
+        "TestID_1" to "Passed",
+        "TestID_2" to "Failed",
+        "TestID_3" to "Passed",
+        "TestID_4" to "Skipped",
+        "TestID_5" to "Failed",
+        "TestID_6 optional" to "Failed"
     )
 
     val testCasesFilter = testCases
@@ -209,26 +209,47 @@ fun main() {
 //    Добавьте в изменяемый словарь с настройками тестовой среды настройки
 //    из другого словаря.
 
-//    val testEnvConfig = mapOf(
-//        "browserType" to "Яндекс Браузер Версия 24.7.6.974 (64-bit)",
-//        "ConfigName_2" to "Description2",
-//        "ConfigName_3" to "Description3",
-//        "ConfigName_4" to "Description4",
-//        "ConfigName_5" to "Description5"
-//    )
-//
-//    val testEnvConfigNew2 = testEnvConfig.toMutableMap()
-//    not work
+    val testEnvConfig1 = mutableMapOf(
+        "browserType" to "Яндекс Браузер Версия 24.7.6.974 (64-bit)",
+        "ConfigName_2" to "Description2",
+        "ConfigName_3" to "Description3"
+    )
 
+    val testEnvConfig2 = mapOf(
+        "ConfigName_1" to "Description1",
+        "ConfigName_3" to "Description3",
+        "ConfigName_4" to "Description4"
+    )
+
+    testEnvConfig1.putAll(testEnvConfig2)
+
+    println("testEnvConfig1 $testEnvConfig1\n")
 
 //    Объедините два неизменяемых словаря с данными о багах.
 
-    //not work
+    val bagReport1 = mutableMapOf(
+        "Тестовый метод_1" to "Баг_1",
+        "Тестовый метод_2" to "Баг_2",
+        "Тестовый метод_3" to "Баг_3",
+    )
+
+    val bagReport2 = mutableMapOf(
+        "Тестовый метод_7" to "Баг_2",
+        "Тестовый метод_8" to "Баг_3",
+        "Тестовый метод_9" to "Баг_4"
+    )
+
+    val bagReportAll = mutableMapOf<String, String>()
+
+    bagReportAll.putAll(bagReport1)
+    bagReportAll.putAll(bagReport2)
+
+    println("bagReportAll $bagReportAll\n")
 
 //    Очистите изменяемый словарь с временными данными о последнем прогоне
 //    автоматизированных тестов.
 
-    val lastTimeRunAutoTest = mutableMapOf(
+    val lastTimeRunAutoTest: MutableMap<String, String> = mutableMapOf(
         "Test_1" to "20.10.2024 07:50",
         "Test_2" to "20.05.2024 07:50",
         "Test_3" to "20.12.2023 07:50"
@@ -241,7 +262,8 @@ fun main() {
 //    Исключите из отчета по автоматизированному тестированию те случаи,
 //    где тесты были пропущены (имеют статус “skipped”)
 
-    val modulesTestsNew1 = modulesTests.filterNot { it.value == "Skipped" }
+    val modulesTestsNew1 = modulesTests
+        .filterNot { it.value == "Skipped" }
     println("modulesTestsNew1 $modulesTestsNew1\n")
 
 //    Удалите из словаря с конфигурациями тестирования набор устаревших конфигураций.
@@ -254,32 +276,51 @@ fun main() {
 //    (ключ — идентификатор теста, значение — результат) в список строк формата
 //    "Test ID: результат".
 
-    //work
+    val testReport = mutableMapOf(
+        "Test ID_1" to "Passed",
+        "Test ID_2" to "Failed",
+        "Test ID_3" to "Skipped"
+    )
+
+    val testReportString = testReport.map { "${it.key}: ${it.value}" }
+
+    println("testReportString $testReportString\n")
 
 //    Преобразуйте изменяемый словарь с результатами последнего тестирования
 //    в неизменяемый для архивации.
 
-    //work
+    val testReportToMap = testReport.toMap()
+
+    println("testReportToMap $testReportToMap\n")
 
 //    Преобразуйте словарь, содержащий ID теста и данные о времени выполнения тестов,
 //    заменив идентификаторы тестов на их названия (название можно получить вызвав
 //    фейковый метод, например getNameById(id: String))
 
-    //work
+    val timePassTest = mapOf(
+        "ID_1" to 100,
+        "ID_2" to 200,
+        "ID_3" to 300
+    )
+
+    val timePassTestName = timePassTest
+        .mapKeys { getNameById("ID") }
+    println("timePassTestName $timePassTestName\n")
 
 //    Для словаря с оценками производительности различных версий приложения увеличьте
 //    каждую оценку на 10%, чтобы учесть новые условия тестирования.
 
-    val performanceAppVersions = mapOf(
-        "Version_1" to 4.9,
-        "Version_2" to 6.0,
-        "Version_3" to 5.0
+    val performAppVer = mapOf(
+        "Version_1" to 4.9F,
+        "Version_2" to 6.0F,
+        "Version_3" to 5.0F
     )
 
-    lastTimeRunAutoTest.clear()
+    val performAppVerNew = performAppVer.mapValues {
+        "%.1f".format(it.value * 1.1)
+    }
 
-    println("lastTimeRunAutoTest $lastTimeRunAutoTest\n")
-    //work
+    println("performAppVerNew $performAppVerNew \n")
 
 //    Проверьте, пуст ли словарь с ошибками компиляции тестов.
 
@@ -290,6 +331,7 @@ fun main() {
     )
 
     val checkIsEmpty = testCompilationErrors.isEmpty()
+
     println("checkIsEmpty $checkIsEmpty\n")
 
 //    Убедитесь, что словарь с результатами нагрузочного тестирования не пуст.
@@ -327,6 +369,10 @@ fun main() {
         .filter {
             it.value != "Passed" && it.key.contains("optional")
         }
-    println("checkingIsOptional $checkingIsOptional\n")
+    println("checkingIsOptional $checkingIsOptional")
 
+}
+
+fun getNameById(id: String): String {
+    return "Name"
 }
