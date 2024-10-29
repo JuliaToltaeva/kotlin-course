@@ -24,11 +24,7 @@ class Shelf(
     }
 
     fun addItem(newItem: String): Boolean {
-
-        if (canAccommodate) {
-            itemsList.add(newItem)
-            return true
-        } else return false
+        return (canAccommodate && itemsList.add(newItem))
     }
 
     private fun getFreeLength(itemName: String): Int {
@@ -49,11 +45,7 @@ class Shelf(
     //Возвращает true, если предмет был удален, и false, если такой предмет не найден.
 
     fun removeItem(itemName: String): Boolean {
-        if (findItem) {
-                itemsList.remove(itemName)
-                return true
-            }
-        else return false
+        return itemsList.remove(itemName)
     }
 
     //Проверка Вместимости (canAccommodate):

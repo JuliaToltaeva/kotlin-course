@@ -60,8 +60,10 @@ fun main() {
         "Тестовый метод5" to "Баг5"
     )
 
-    val testMetaNew = testMeta1 - "Тестовый метод1"
-    println("testMetaNew $testMetaNew\n")
+    testMeta1["Тестовый метод6"] = "Баг6"
+
+    testMeta1.remove("Тестовый метод1")
+    println("testMeta1 $testMeta1\n")
 
 //    Для словаря с результатами тестирования веб-страниц (ключ — URL страницы,
 //    значение — статус ответа), выведите сообщение о странице и статусе её проверки.
@@ -108,9 +110,9 @@ fun main() {
         "EndPoint_5" to "505"
     )
 
-    val testAPINew1 = testAPI
+    val testAPINew1: String = testAPI
         .getOrElse("EndPoint_3") {
-            Exception("не был протестирован")
+            "не был протестирован"
         }
     val testAPINew2 = testAPI
         .getOrElse("EndPoint_10") {
@@ -178,6 +180,8 @@ fun main() {
 //    ("Passed", "Failed", "Skipped"). Отфильтруйте словарь, оставив только те сценарии,
 //    идентификаторы которых соответствуют определённой версии тестов.
 
+    // до сюда?
+
     val testCases = mapOf(
         "TestID_1" to "Passed",
         "TestID_2" to "Failed",
@@ -188,7 +192,7 @@ fun main() {
     )
 
     val testCasesFilter = testCases
-        .filterKeys { it == "Test_PRC-131" }
+        .contains("3")
     println("testCasesFilter $testCasesFilter\n")
 
 //    У вас есть словарь, где ключи — это названия функциональных модулей приложения,
@@ -227,13 +231,13 @@ fun main() {
 
 //    Объедините два неизменяемых словаря с данными о багах.
 
-    val bagReport1 = mutableMapOf(
+    val bagReport1 = mapOf(
         "Тестовый метод_1" to "Баг_1",
         "Тестовый метод_2" to "Баг_2",
         "Тестовый метод_3" to "Баг_3",
     )
 
-    val bagReport2 = mutableMapOf(
+    val bagReport2 = mapOf(
         "Тестовый метод_7" to "Баг_2",
         "Тестовый метод_8" to "Баг_3",
         "Тестовый метод_9" to "Баг_4"
@@ -282,7 +286,8 @@ fun main() {
         "Test ID_3" to "Skipped"
     )
 
-    val testReportString = testReport.map { "${it.key}: ${it.value}" }
+    val testReportString = testReport
+        .map { "${it.key}: ${it.value}" }
 
     println("testReportString $testReportString\n")
 
