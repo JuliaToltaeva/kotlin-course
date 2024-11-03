@@ -13,7 +13,9 @@ package com.juliatoltaeva.com.JuliaToltaeva.kotlincourse.lesson17.homework
 //Дополнительное разветвление для Многоугольник: Треугольник, Четырехугольник
 
 open class Figure(
+
     val square: Int,
     val color: String
+
 )
 

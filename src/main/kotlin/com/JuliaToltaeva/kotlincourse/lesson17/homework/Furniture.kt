@@ -6,5 +6,7 @@ package com.juliatoltaeva.com.JuliaToltaeva.kotlincourse.lesson17.homework
 //Дополнительное разветвление для …: …
 
 open class Furniture(
+
     val typeOfAppointment: String // по предназначению
+
 )
