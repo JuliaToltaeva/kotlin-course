@@ -1,4 +1,4 @@
-package com.juliatoltaeva.lesson20.homemork
+package com.juliatoltaeva.com.JuliaToltaeva.kotlincourse.lesson20.homemork
 
 import java.io.InputStream
 
@@ -85,9 +85,9 @@ interface Rechargeable {
 
 fun main () {
 
-    val kettle = Kettle()
-    val oven = Oven()
-    val refrigerator = RefrigeratorSub(0)
+    val kettle = com.juliatoltaeva.com.JuliaToltaeva.kotlincourse.lesson20.homemork.Kettle()
+    val oven = com.juliatoltaeva.com.JuliaToltaeva.kotlincourse.lesson20.homemork.Oven()
+    val refrigerator = com.juliatoltaeva.com.JuliaToltaeva.kotlincourse.lesson20.homemork.RefrigeratorSub(0)
 
     kettle.setTemperature(90)
     kettle.programAction("Кипение")

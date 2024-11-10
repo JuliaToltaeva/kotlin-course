@@ -1,6 +1,6 @@
-package com.juliatoltaeva.lesson20.homemork
+package com.juliatoltaeva.com.JuliaToltaeva.kotlincourse.lesson20.homemork
 
-class Kettle : HouseholdAppliancesTemperatureRegulatable() {
+class Kettle : com.juliatoltaeva.com.JuliaToltaeva.kotlincourse.lesson20.homemork.HouseholdAppliancesTemperatureRegulatable() {
 
     override val maxTemperature: Int
         get() = 95

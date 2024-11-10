@@ -1,4 +1,4 @@
-package com.juliatoltaeva.lesson20.homemork
+package com.juliatoltaeva.com.JuliaToltaeva.kotlincourse.lesson20.homemork
 
 import java.io.InputStream
 
@@ -11,17 +11,18 @@ import java.io.InputStream
 // и программирование устройства (считай - задание режима работы)
 // не имеет смысла при выключенном питании - добавь эту проверку.
 
-class RefrigeratorSub(
+class WashingMachineSub(
 
     override val maxTemperature: Int
 
-) : Refrigerator() {
+) : com.juliatoltaeva.com.JuliaToltaeva.kotlincourse.lesson20.homemork.Refrigerator() {
 
     private var isPowerOn = false
 
-    override fun powerOn() {
+    override fun powerOn()
+    {
         isPowerOn = !isPowerOn
-        println("Холодильник включен")
+        println("Стиральная машина включена")
 
     }
 
@@ -33,7 +34,7 @@ class RefrigeratorSub(
 
         var isOn = true
 
-        println("Холодильник открыт")
+        println("Стиральная машина открыта")
 
     }
 
@@ -44,18 +45,16 @@ class RefrigeratorSub(
 
     override fun setTemperature(temp: Int) {
 
-        val maxTemperature = 10
+        val maxTemperature = 90
 
         if (temp <= maxTemperature) {
 
             powerOn()
 
-            println("В холодильнике установлена температура $temp")
-
+            println("В стиральной машине установлена температура $temp")
         }
 
     }
-
 
     override fun emitLight() {
         TODO("Not yet implemented")
@@ -81,7 +80,7 @@ class RefrigeratorSub(
 
         powerOn()
 
-        println("Включен режим ручной настройки холодильника")
+        println("Включен режим ручной настройки стиральной машины")
     }
 
     override fun execute() {
