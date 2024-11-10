@@ -81,7 +81,7 @@ class RefrigeratorSub(
 
         powerOn()
 
-        println("Включен режим ручной настройки холодильника")
+        println("Включен режим ручной настройки холодильника, установлена программа $action")
     }
 
     override fun execute() {

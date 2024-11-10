@@ -91,9 +91,16 @@ fun main () {
 
     kettle.setTemperature(90)
     kettle.programAction("Кипение")
+    println("-----")
 
     oven.setTemperature(180)
     oven.programAction("Запекание")
+    println("-----")
+
+    refrigerator.setTemperature(-20)
+    refrigerator.programAction("Быстрая заморозка")
+
+
 
 
 

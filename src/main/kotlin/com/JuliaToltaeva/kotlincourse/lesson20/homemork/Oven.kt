@@ -23,7 +23,7 @@ class Oven : com.juliatoltaeva.com.JuliaToltaeva.kotlincourse.lesson20.homemork.
 
         powerOn()
 
-        println("Включен режим ручной настройки")
+        println("Включен режим ручной настройки, установлена программа $action")
     }
 
     override fun execute() {}
