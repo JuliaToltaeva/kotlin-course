@@ -27,6 +27,10 @@ abstract class BaseClass(
 
     private var privateField = "добавь сеттер чтобы изменить меня из main()"
 
+    protected fun setPrivateFieldValue(value: String) {
+        privateField = value
+    }
+
     fun getAll(): String {
         return mapOf(
             "privateVal" to privateVal,
@@ -57,6 +61,7 @@ abstract class BaseClass(
 
     // объясни, почему эта функция не может быть публичной или protected
     // потому что это внутренние процедуры внутри класса и мы не будет их наследовать
+
     private fun getPrivateClass() = PrivateClass()
 
     protected class ProtectedClass

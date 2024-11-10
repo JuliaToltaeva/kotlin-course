@@ -29,15 +29,13 @@ open class ChildrenClass(
         return value == "Антонио Бандерас"
     }
 
-    override var protectedField
-        get() = super.protectedField
-        set(value) {
-            super.protectedField = value
-        }
+    fun changeProtectedField(value: String) {
+        protectedField = value
+    }
 
-//    fun setPrivateField(value: String) {
-//        this.privateField = value
-//    }
+    fun setPrivateField(value: String) {
+        setPrivateFieldValue(value)
+    }
 
 
 

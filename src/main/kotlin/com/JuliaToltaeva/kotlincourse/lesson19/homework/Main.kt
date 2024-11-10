@@ -12,8 +12,8 @@ fun main() {
 
     println("----------")
     childrenClass.publicField = "Антонио Бандерас"
-
-    // вопрос для урока childrenClass.protectedField = "not work"
+    childrenClass.changeProtectedField("ProtectedField_2")
+    childrenClass.setPrivateField("PrivateField_2")
 
 
     println(childrenClass.getAll())
