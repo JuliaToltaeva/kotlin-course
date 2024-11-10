@@ -35,9 +35,9 @@ open class ChildrenClass(
             super.protectedField = value
         }
 
-    fun setPrivateField(value: String) {
-        this.privateField = value
-    }
+//    fun setPrivateField(value: String) {
+//        this.privateField = value
+//    }
 
 
 

@@ -22,19 +22,19 @@ open class SlotMachine(
 
     val model: String,
 
-    var isOn: Boolean,
+    private var isOn: Boolean,
 
-    var osIsLoaded: Boolean,
+    private var osIsLoaded: Boolean,
 
-    var listOfGames: List<String>,
+    val listOfGames: List<String>,
 
-    var joystickAvailability: Boolean,
+    val joystickAvailability: Boolean,
 
-    protected var balanceOfProceeds: Float,
+    private var balanceOfProceeds: Float,
 
-    val owner: String,
+    private var owner: String,
 
-    val supportPhone: String
+    private var supportPhone: String
 
 ) {
 
@@ -49,13 +49,23 @@ open class SlotMachine(
 //    открыть сейф и выдать наличные
 //    выплатить выигрыш
 
-    fun turnOn() {}
+    fun turnOn() {
 
-    fun turnOff() {}
+        isOn = true
+        loadOs()
+
+    }
+
+    fun turnOff() {
+
+        shutDownOs()
+        isOn = false
+
+    }
 
     private fun loadOs() {}
 
-    fun shutDownOs() {}
+    private fun shutDownOs() {}
 
     fun showListOfGames() {}
 
@@ -63,7 +73,7 @@ open class SlotMachine(
 
     fun payForGameSession() {}
 
-    protected fun openSafeNGetCash() {}
+    fun openSafeNGetCash() {}
 
     protected fun payTheWinnings() {}
 
