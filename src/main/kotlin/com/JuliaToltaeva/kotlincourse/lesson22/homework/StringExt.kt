@@ -17,13 +17,13 @@ package com.juliatoltaeva.com.JuliaToltaeva.kotlincourse.lesson22.homework
 
 fun String.encrypt(base: Int): String {
 
-    return this.map { (it + base).toChar() }
-        .joinToString { "" }
+    return map { it + base }
+        .joinToString ( "" )
 }
 
 
 fun String.decrypt(base: Int): String {
 
-    return this.map { (it - base).toChar() }
-        .joinToString { "" }
+    return map { it - base }
+        .joinToString ( "" )
 }
