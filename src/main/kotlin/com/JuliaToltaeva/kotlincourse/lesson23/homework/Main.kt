@@ -13,6 +13,10 @@ fun main() {
 
     val lounge = 2211L
 
+    val double = 2211.0
+
+    val list5 = listOf(string, int, double)
+
     println("Задача 1")
     analyzeDataType(string)
     analyzeDataType(int)
@@ -36,6 +40,14 @@ fun main() {
     println(getAnyAndSetSquare(7))
     println(getAnyAndSetSquare(7.0))
     println(getAnyAndSetSquare("7.0"))
+
+
+    println("\nЗадача 5")
+    println(sumIntOrDoubleValues(list5))
+
+
+
+
 
 
 }
@@ -123,6 +135,21 @@ fun getAnyAndSetSquare(arg4: Any): Number {
 // типа Any и возвращает сумму всех целочисленных (Int) и вещественных (Double)
 // значений в списке. Все остальные типы должны быть проигнорированы.
 
+fun sumIntOrDoubleValues(list5: List<Any?>): Double {
+
+    return list5.sumOf {
+
+        when (it) {
+
+            is Double -> it
+            is Int -> it.toDouble()
+            else -> 0.0
+
+        }
+
+    }
+}
+
 
 //Задача 6
 //Создайте функцию tryCastToListAndPrint, которая принимает параметр типа Any
@@ -130,3 +157,14 @@ fun getAnyAndSetSquare(arg4: Any): Number {
 // должна напечатать все строки из списка, если элемент не является строкой
 // то вывести предупреждение об этом. Если приведение неудачно, должно быть
 // выведено сообщение об ошибке, не прерывая выполнение программы.
+
+fun tryCastToListAndPrint(value: Any) {
+
+    (value as? List<*>)?.forEach {
+
+        val result = (it as? String) ?: println("элемент не является строкой")
+        println(result)
+
+    } ?: println("ошибка")
+
+}
