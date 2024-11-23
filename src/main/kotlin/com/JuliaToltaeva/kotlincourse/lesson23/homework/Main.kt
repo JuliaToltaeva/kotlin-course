@@ -46,7 +46,9 @@ fun main() {
     println(sumIntOrDoubleValues(list5))
 
 
-
+    println("\nЗадача 6")
+    println(tryCastToListAndPrint(string))
+    println(tryCastToListAndPrint(list5))
 
 
 
