@@ -7,6 +7,18 @@ fun inFun() {
     inFun()
 }
 
+fun setYear1(year: Int) {
+    require(year >= 0) {
+        "текст ошибки 1"
+    }
+}
+
+fun setYear2(year: Int) {
+    check(year >= 0) {
+        "текст ошибки 2"
+    }
+}
+
 fun main() {
 
     //NullPointerException
@@ -29,9 +41,11 @@ fun main() {
 
     //IllegalArgumentException
 
+    setYear1(-1)
 
     //IllegalStateException
 
+    setYear2(-1)
 
     //OutOfMemoryError
 
@@ -68,10 +82,10 @@ fun main() {
         "string".toInt()
 
         //IllegalArgumentException
-
+        setYear1(-1)
 
         //IllegalStateException
-
+        setYear2(-1)
 
         //OutOfMemoryError
         while (true) {
