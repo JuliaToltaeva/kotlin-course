@@ -144,7 +144,7 @@ fun main() {
 
         argNull!!
 
-    } catch (e: Exception) {
+    } catch (e: Throwable) {
 
         when (e) {
 
