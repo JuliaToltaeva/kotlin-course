@@ -1,7 +1,5 @@
 package com.juliatoltaeva.com.JuliaToltaeva.kotlincourse.lesson25.homework.task5
 
-import com.juliatoltaeva.com.JuliaToltaeva.kotlincourse.lesson25.homework.task4.func40
-
 
 //Задание 5. Создай функцию расширение списка чисел, которая будет возвращать список
 // уникальных чисел (без дубликатов).

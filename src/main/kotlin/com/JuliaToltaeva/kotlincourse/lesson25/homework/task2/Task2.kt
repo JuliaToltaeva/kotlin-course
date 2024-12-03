@@ -27,10 +27,10 @@ fun main() {
 
     //Создай аналогичное лямбда выражение с указанием типа.
 
-    val func22: (List<Int>) -> Double = { list ->
+    val func22: (List<Int>) -> Double = {
 
-        require(list.isNotEmpty()) { "Пустой список" }
-        list.average()
+        require(it.isNotEmpty()) { "Пустой список" }
+        it.average()
 
     }
 

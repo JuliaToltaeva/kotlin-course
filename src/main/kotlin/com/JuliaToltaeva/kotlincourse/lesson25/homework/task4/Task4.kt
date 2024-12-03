@@ -1,8 +1,5 @@
 package com.juliatoltaeva.com.JuliaToltaeva.kotlincourse.lesson25.homework.task4
 
-import com.juliatoltaeva.com.JuliaToltaeva.kotlincourse.lesson25.homework.task3.func30
-import jdk.internal.org.jline.utils.Colors.s
-
 
 //Задание 4. Создай функцию, которая принимает большое число и возвращает сумму
 // цифр этого числа.
@@ -20,21 +17,21 @@ fun main() {
 
     val func41 = fun(arg: String): Int {
 
-        require(arg.isNotEmpty()) { "Пустой список" }
+        require(arg.isNotEmpty()) { "Пустой аргумент" }
         return arg.sumOf { it.digitToInt() }
 
     }
 
-    val func42: (String) -> Int = { arg ->
+    val func42: (String) -> Int = {
 
-        require(arg.isNotEmpty()) { "Пустой список" }
-        arg.sumOf { it.digitToInt() }
+        require(it.isNotEmpty()) { "Пустой аргумент" }
+        it.sumOf { it.digitToInt() }
 
     }
 
     val func43 = { arg: String ->
 
-        require(arg.isNotEmpty()) { "Пустой список" }
+        require(arg.isNotEmpty()) { "Пустой аргумент" }
         arg.sumOf { it.digitToInt() }
 
     }
