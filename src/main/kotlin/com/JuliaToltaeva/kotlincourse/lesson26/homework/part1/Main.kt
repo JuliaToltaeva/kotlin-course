@@ -1,4 +1,4 @@
-package com.juliatoltaeva.com.JuliaToltaeva.kotlincourse.lesson26.homework
+package com.juliatoltaeva.com.JuliaToltaeva.kotlincourse.lesson26.homework.part1
 
 fun main() {
 
