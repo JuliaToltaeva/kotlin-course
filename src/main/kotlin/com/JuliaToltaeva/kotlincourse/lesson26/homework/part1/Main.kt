@@ -28,7 +28,9 @@ fun main() {
 
     val func71: (
         list: List<Int>,
-        set: Set<String>) -> Map<String, Int> = { list, set -> mapOf(
+        set: Set<String>
+    ) -> Map<String, Int> = { list, set ->
+        mapOf(
             "1" to 1,
             "2" to 2
         )
@@ -113,7 +115,7 @@ fun func8(
     func80: (Int) -> String
 ): String {
 
-    return ""
+    return func80(arg)
 
 }
 
