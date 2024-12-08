@@ -8,27 +8,61 @@ fun main() {
         val list = List(10000000) { (0..10000).random() }
         list.sorted()
     }
-
+    println("Task1")
     println(timeTracker(arg))
 
 
     //Задание 2: Использование apply для инициализации объекта Employee
     //Создайте объект Employee и используйте apply для инициализации его полей email и department.
 
-    val employee = Employee("Name", 20, "Position")
+    val employee2 = Employee("Name", 20, "Position")
         .apply {
             email = "mailik@gmail.com"
             department = "Department of ..."
         }
+    println("\nTask2")
+    println(employee2)
 
 
-    val person = Person("Julia Toltaeva", 34)
-    getPerson(person)
+    //Задание 3
+    val person3 = Person("Julia Toltaeva", 34)
+        .apply {
+            email = "mailik@gmail.com"
+        }
+    println("\nTask3")
+    getPerson(person3)
 
 
     //Задание 4:
+    val person4 = Person("Julia Toltaeva", 34)
+        .apply {
+            email = "mailik@gmail.com"
+        }
+
     val position = "Position"
-    println(convertPerson(person))
+    println("\nTask4")
+    println(convertPerson(person4))
+
+
+    //Задание 5: Использование run для преобразования и инициализации Employee
+//Создайте объект класса Person. Используйте функцию run, чтобы инициализировать объект Employee, добавить ему email и
+//department с помощью apply, вернуть инициализированный объект.
+
+    val person5 = Person("Julia Toltaeva", 34)
+        .apply {
+            email = "mailik@gmail.com"
+        }
+
+    val employee5 = Employee("Name", 20, "Position")
+        .run {
+            this.apply {
+                email = person5.email
+                department = "Department of ..."
+            }
+        }
+
+    println("\nTask5")
+    println(employee5.toString())
 
 
 }
@@ -76,9 +110,9 @@ fun timeTracker(arg: () -> List<Int>): Long {
 //виде.
 //Создайте объект Person и используйте also для печати данных в консоль с помощью метода который только что создали.
 
-fun getPerson(person: Person) {
+fun getPerson(person3: Person) {
 
-    println("Person name: ${person.name}, Person age: ${person.age}")
+    println("Person name: ${person3.name}, Person age: ${person3.age}")
 
 }
 
@@ -88,25 +122,21 @@ fun getPerson(person: Person) {
 //должность. Возвращаемым значением должен быть новый объект Employee.
 
 
-fun convertPerson(person: Person): Employee {
+fun convertPerson(person4: Person): Employee {
 
-    with(person) {
+    with(person4) {
 
-        val employee2 = Employee("Name", 20, "Position")
+        val employee4 = Employee("Name", 20, "Position")
             .apply {
                 email = "mailik@gmail.com"
                 department = "Department of ..."
+                var position = "Position"
             }
 
-        return employee2
+        return employee4
     }
 
 }
-
-
-//Задание 5: Использование run для преобразования и инициализации Employee
-//Создайте объект класса Person. Используйте функцию run, чтобы инициализировать объект Employee, добавить ему email и
-//department с помощью apply, вернуть инициализированный объект.
 
 
 //Задание 6: Использование let для безопасного преобразования Person в Employee
