@@ -87,7 +87,7 @@ fun main() {
 //    list.sorted()
 //}
 
-fun timeTracker(arg: () -> List<Int>): Long {
+fun timeTracker(arg: () -> Any): Long {
     val timeStart = System.currentTimeMillis()
     arg()
     val timeEnd = System.currentTimeMillis()
