@@ -1,5 +1,6 @@
 package com.juliatoltaeva.com.JuliaToltaeva.kotlincourse.lesson28.homework
 
+import com.juliatoltaeva.com.JuliaToltaeva.kotlincourse.lesson22.classwork.createList
 import java.io.File
 
 fun main() {
@@ -19,9 +20,9 @@ fun main() {
     }
 
     if (file.exists()) {
-        println("Файл существует")
+        println("Файл существует: ${file.name}")
     } else {
-        println("Файл не существует")
+        println("Файл не существует: ${file.name}")
     }
 
 
@@ -31,15 +32,15 @@ fun main() {
 
     println("\nЗадача 2")
 
-    val dir2 = File("workspace/task2/testDir")
-    dir2.mkdirs()
+    val testDir = File("workspace/task2/testDir")
+    testDir.mkdirs()
 
-    dir2.apply {
+    testDir.apply {
         if (isDirectory) {
-            println("Является директорией")
-            println(absolutePath)
+            println("Является директорией: ${testDir.name}")
+            println("Абсолютный путь: $absolutePath")
         } else {
-            println("Не является директорией")
+            println("Не является директорией: ${testDir.name}")
         }
     }
 
@@ -51,23 +52,23 @@ fun main() {
 
     println("\nЗадача 3")
 
-    val dir3 = File("workspace/task3/structure")
-    dir3.mkdirs()
+    val structure = File("workspace/task3/structure")
+    structure.mkdirs()
 
     val myDir = File("workspace/task3/structure/myDir")
-    myDir.mkdirs()
+    myDir.mkdir()
 
     val subDir1 = File("workspace/task3/structure/myDir/subDir1")
-    subDir1.mkdirs()
+    subDir1.mkdir()
 
     val subDir2 = File("workspace/task3/structure/myDir/subDir2")
-    subDir2.mkdirs()
+    subDir2.mkdir()
 
     val checkDir = fun(subDir: File) {
         if (subDir.exists() && subDir.isDirectory) {
-            println("Директория создана: $subDir")
+            println("Директория создана: ${subDir.name}")
         } else {
-            println("Директория не создана: $subDir")
+            println("Директория не создана: ${subDir.name}")
         }
     }
 
@@ -76,12 +77,53 @@ fun main() {
 
 //Задача 4
 //Создайте директорию workspace/task4/temp.
-//Внутри директории temp создайте несколько вложенных файлов и директорий. Удалите директорию workspace/task4 со всем
-//содержимым
+//Внутри директории temp создайте несколько вложенных файлов и директорий.
+//Удалите директорию workspace/task4 со всем содержимым
+
+    println("\nЗадача 4")
+
+    val temp = File("workspace/task4/temp")
+    temp.mkdirs()
+
+    val tempFile1 = File("workspace/task4/temp/file1.txt")
+    val tempFile2 = File("workspace/task4/temp/file2.txt")
+
+    val tempDir1 = File("workspace/task4/temp/dir1")
+    val tempDir2 = File("workspace/task4/temp/dir2")
+
+    tempFile1.createNewFile()
+    tempFile2.createNewFile()
+
+    tempDir1.createNewFile()
+    tempDir2.createNewFile()
+
+    val checkFile = fun(file: File) {
+        if (file.exists() && file.isFile) {
+            println("Файл создан: ${file.name}")
+        } else {
+            println("Файл не создан: ${file.name}")
+        }
+    }
+
+    checkFile(tempFile1)
+    checkFile(tempFile2)
+
+    val task4 = File("workspace/task4")
+
+    if (task4.deleteRecursively()) {
+        println("Директория удалена: $task4")
+    } else {
+        println("Директория не удалена: $task4")
+    }
+
 
 //Задача 5
 //Создайте файл workspace/task5/config/config.txt
 //запишите в него список параметров (в формате ключ=значение), а затем прочитайте файл и выведите только значения.
+
+    println("\nЗадача 5")
+
+
 
 //Задача 6
 //Пройди по всем вложенным директориям workspace и выведи в консоль сначала пути директорий, а потом пути файлов
