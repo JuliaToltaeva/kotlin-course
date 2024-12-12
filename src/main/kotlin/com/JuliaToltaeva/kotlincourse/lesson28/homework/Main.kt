@@ -54,7 +54,25 @@ fun main() {
     val dir3 = File("workspace/task3/structure")
     dir3.mkdirs()
 
+    val myDir = File("workspace/task3/structure/myDir")
+    myDir.mkdirs()
 
+    val subDir1 = File("workspace/task3/structure/myDir/subDir1")
+    subDir1.mkdirs()
+
+    val subDir2 = File("workspace/task3/structure/myDir/subDir2")
+    subDir2.mkdirs()
+
+    val checkDir = fun(subDir: File) {
+        if (subDir.exists() && subDir.isDirectory) {
+            println("Директория создана: $subDir")
+        } else {
+            println("Директория не создана: $subDir")
+        }
+    }
+
+    checkDir(subDir1)
+    checkDir(subDir2)
 
 //Задача 4
 //Создайте директорию workspace/task4/temp.
