@@ -1,6 +1,5 @@
 package com.juliatoltaeva.com.JuliaToltaeva.kotlincourse.lesson28.homework
 
-import com.juliatoltaeva.com.JuliaToltaeva.kotlincourse.lesson22.classwork.createList
 import java.io.File
 
 fun main() {
@@ -11,18 +10,18 @@ fun main() {
 
     println("\nЗадача 1")
 
-    val file = File("workspace/task1/example.txt")
+    val example = File("workspace/task1/example.txt")
 
-    file.apply {
+    example.apply {
         parentFile.mkdirs()
         createNewFile()
         writeText("Hello, Kotlin!")
     }
 
-    if (file.exists()) {
-        println("Файл существует: ${file.name}")
+    if (example.exists()) {
+        println("Файл существует: ${example.name}")
     } else {
-        println("Файл не существует: ${file.name}")
+        println("Файл не существует: ${example.name}")
     }
 
 
@@ -119,18 +118,78 @@ fun main() {
 
 //Задача 5
 //Создайте файл workspace/task5/config/config.txt
-//запишите в него список параметров (в формате ключ=значение), а затем прочитайте файл и выведите только значения.
+//запишите в него список параметров (в формате ключ=значение), а затем прочитайте файл и
+//выведите только значения.
 
     println("\nЗадача 5")
 
+    val fileConfig = File("workspace/task5/config/config.txt")
+
+    fileConfig.parentFile.mkdirs()
+    fileConfig.createNewFile()
+
+    val map = mapOf(
+        "key1" to "value1",
+        "key2" to "value2",
+        "key3" to "value3"
+    )
+
+    val mapToString = map
+        .map { "${it.key}=${it.value}" }
+        .joinToString("\n")
+
+
+    fileConfig.writeText(mapToString)
+    val file02 = fileConfig.readLines()
+        .associate {
+            val string1 = it.split("=")
+            string1[0] to string1[1]
+        }
+
+    file02.forEach { println(it) }
 
 
 //Задача 6
 //Пройди по всем вложенным директориям workspace и выведи в консоль сначала пути директорий, а потом пути файлов
 
+    println("\nЗадача 6")
+
+    println("Директории:")
+    val walkingDir = File("workspace")
+        .walk()
+        .forEach {
+            if (it.isDirectory) {
+                println(it.absolutePath)
+            }
+        }
+
+    println("Файлы:")
+    val walkingDFile = File("workspace")
+        .walk()
+        .forEach {
+            if (it.isFile) {
+                println(it.absolutePath)
+            }
+        }
+
+
 //Задача 7
 //Создайте директорию workspace/task9/docs.
 //Проверь, есть ли файл с именем readme.md. Если файла нет, создайте его и запишите текст "This is a README file."
+
+    println("\nЗадача 7")
+
+    val docs = File("workspace/task9/docs")
+    docs.mkdirs()
+
+    val readme = File("workspace/task9/docs/readme.md")
+    val string = "This is a README file."
+
+    if (!readme.exists()) {
+        readme.createNewFile()
+        readme.writeText(string)
+    }
+
 
 //Задача 8
 //Создайте файлы
@@ -140,5 +199,45 @@ fun main() {
 //Создайте директорию workspace/task10/backup и скопируйте туда файлы из workspace/task10/data сохраняя структуру
 //директорий. Для копирования используй метод copyTo
 
+    val data14 = File("workspace/task10/data/1/4/prod/data14.mysql")
+    val data23 = File("workspace/task10/data/2/3/prod/data23.mysql")
+    val data52 = File("workspace/task10/data/5/2/prod/data52.mysql")
+
+    val listOfFiles = listOf(
+        data14,
+        data23,
+        data52
+    )
+
+    listOfFiles.forEach { file ->
+        file.parentFile.mkdirs()
+        file.createNewFile()
+    }
+
+    val backup = File("workspace/task10/backup")
+    backup.mkdirs()
+
+    listOfFiles.forEach { file ->
+
+        val data = File("workspace/task10/data")
+
+        // на этом месте стало тяжело
+
+        val relativePath = file
+            .parentFile
+            .toRelativeString(data)
+
+        val backupDir = File(backup, relativePath)
+        backupDir.mkdirs()
+
+        file
+            .copyTo(
+                File(backupDir, file.name),
+                overwrite = true
+            )
+    }
+
+
 }
+
 
