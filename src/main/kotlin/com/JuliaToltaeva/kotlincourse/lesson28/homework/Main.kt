@@ -177,7 +177,6 @@ fun main() {
 //Создайте директорию workspace/task9/docs.
 //Проверь, есть ли файл с именем readme.md. Если файла нет, создайте его и запишите текст "This is a README file."
 
-    println("\nЗадача 7")
 
     val docs = File("workspace/task9/docs")
     docs.mkdirs()
@@ -198,6 +197,7 @@ fun main() {
 //workspace/task10/data/5/2/prod/data52.mysql
 //Создайте директорию workspace/task10/backup и скопируйте туда файлы из workspace/task10/data сохраняя структуру
 //директорий. Для копирования используй метод copyTo
+
 
     val data14 = File("workspace/task10/data/1/4/prod/data14.mysql")
     val data23 = File("workspace/task10/data/2/3/prod/data23.mysql")
