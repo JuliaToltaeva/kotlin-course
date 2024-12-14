@@ -64,7 +64,14 @@ fun main() {
     subDir2.mkdir()
 
     val checkDir = fun(subDir: File) {
-        if (subDir.exists() && subDir.isDirectory) {
+        if (
+            subDir.exists()
+            &&
+            subDir.isDirectory
+            &&
+            myDir.listFiles()
+                ?.contains(subDir) == true
+        ) {
             println("Директория создана: ${subDir.name}")
         } else {
             println("Директория не создана: ${subDir.name}")
@@ -154,23 +161,13 @@ fun main() {
 
     println("\nЗадача 6")
 
-    println("Директории:")
-    val walkingDir = File("workspace")
+    val result = File("workspace")
         .walk()
-        .forEach {
-            if (it.isDirectory) {
-                println(it.absolutePath)
-            }
+        .groupBy {
+            if (it.isDirectory) "Директории" else "Файлы"
         }
 
-    println("Файлы:")
-    val walkingDFile = File("workspace")
-        .walk()
-        .forEach {
-            if (it.isFile) {
-                println(it.absolutePath)
-            }
-        }
+    println(result)
 
 
 //Задача 7
@@ -178,11 +175,10 @@ fun main() {
 //Проверь, есть ли файл с именем readme.md. Если файла нет, создайте его и запишите текст "This is a README file."
 
 
-    val docs = File("workspace/task9/docs")
-    docs.mkdirs()
-
     val readme = File("workspace/task9/docs/readme.md")
     val string = "This is a README file."
+
+    readme.parentFile.mkdirs()
 
     if (!readme.exists()) {
         readme.createNewFile()
