@@ -128,7 +128,7 @@ fun main() {
         1, 1, 1
     )
     val localDateTime2 = LocalDateTime.of(
-        2025, 1,1, 1, 1, 1
+        2025, 1, 1, 1, 1, 1
     )
     val zonedDateTime2 = ZonedDateTime.of(
         localDateTime, ZoneId.of("Europe/Vatican")
@@ -166,6 +166,66 @@ fun main() {
 //и "Зумер" для тех, кто родился с 1997 по 2012 год включительно. Если дата рождения не попадает ни в один
 //из этих диапазонов, функция должна возвращать "Не определено". Для сравнения дат используй методы isAfter(otherDate)
 //и isBefore(otherDate). Объекты с эталонными датами вынеси в приватные поля файла с методом identifyGeneration.
+
+    println("\nЗадача 6")
+
+    val identifyGeneration = fun(birthday: LocalDate) {
+
+        return when {
+
+            (birthday.isAfter(LocalDateForYear.getDate1()) || birthday == LocalDateForYear.getDate1())
+                    &&
+                    (birthday.isBefore(LocalDateForYear.getDate2()) || birthday == LocalDateForYear.getDate2())
+                        -> println("Бумер")
+
+            (birthday.isAfter(LocalDateForYear.getDate3()) || birthday == LocalDateForYear.getDate3())
+                    &&
+                    (birthday.isBefore(LocalDateForYear.getDate4()) || birthday == LocalDateForYear.getDate4())
+                        -> println("Зумер")
+
+            else -> println("Не определено")
+        }
+    }
+
+    println(
+        "Должны быть не определены: " +
+                "1940, " +
+                "1965, " +
+                "1980, " +
+                "1945-12-31, " +
+                "1996-12-31"
+    )
+
+    identifyGeneration(LocalDate.of(1940, 1, 1))
+    identifyGeneration(LocalDate.of(1945, 12, 31))
+    identifyGeneration(LocalDate.of(1965, 1, 1))
+    identifyGeneration(LocalDate.of(1980, 1, 1))
+    identifyGeneration(LocalDate.of(1996, 12, 31))
+    identifyGeneration(LocalDate.of(2013, 11, 1))
+    identifyGeneration(LocalDate.of(2020, 11, 1))
+
+    println(
+        "\nДолжны быть бумеры: " +
+                "1946-1-1, " +
+                "1950, " +
+                "1964-12-31, "
+    )
+
+    identifyGeneration(LocalDate.of(1946, 1, 1))
+    identifyGeneration(LocalDate.of(1950, 1, 1))
+    identifyGeneration(LocalDate.of(1964, 12, 31))
+
+    println(
+        "\nДолжны быть зумеры: " +
+                "1997-1-1, " +
+                "2005, " +
+                "2012-12-31"
+    )
+
+    identifyGeneration(LocalDate.of(1997, 1, 1))
+    identifyGeneration(LocalDate.of(2005, 1, 1))
+    identifyGeneration(LocalDate.of(2012, 12, 31))
+
 
 //Создай два объекта даты: 25 февраля 2023 года и 25 февраля 2024 года. Создай форматтер, который форматирует дату
 // в месяц и день.
