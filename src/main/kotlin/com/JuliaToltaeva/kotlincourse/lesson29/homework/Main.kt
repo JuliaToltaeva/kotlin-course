@@ -43,7 +43,7 @@ fun main() {
 
     println("\nЗадача 4")
 
-    val formatDate = fun(timeInner: Temporal): String {
+    val myFormatDate = fun(timeInner: Temporal): String {
 
         val formatter = DateTimeFormatter.ofPattern(
             "HH:mm:ss ZZZ"
@@ -55,25 +55,61 @@ fun main() {
                 timeInner.format(formatter)
             }
 
-            is Instant -> {
-                timeInner.toString()
+            is OffsetDateTime -> {
+                timeInner.format(formatter)
             }
 
             else -> {
-                "Другой вид, которого я не привела?"
+                "Этот тип даты не содержит время и/или часовой пояс"
             }
         }
 
     }
 
+    val isoFormatDate = fun(timeInner: Temporal): String {
+
+        val formatter = DateTimeFormatter.ISO_ZONED_DATE_TIME
+
+        return when (timeInner) {
+
+            is ZonedDateTime -> {
+                timeInner.format(formatter)
+            }
+
+            is OffsetDateTime -> {
+                timeInner.format(formatter)
+            }
+
+            else -> {
+                "Этот тип даты не содержит время и/или часовой пояс"
+            }
+        }
+
+    }
+
+
+    val localDate = LocalDate.now()
+    val localTime = LocalTime.now()
     val localDateTime = LocalDateTime.now()
     val zonedDateTime = ZonedDateTime.now()
     val offsetDateTime = OffsetDateTime.now()
 
-    println(formatDate(localDateTime))
-    println(formatDate(zonedDateTime))
-    println(formatDate(offsetDateTime))
-    println(formatDate(instant))
+    println("Мой формат:")
+    println("LocalDate: ${myFormatDate(localDate)}")
+    println("LocalTime: ${myFormatDate(localTime)}")
+    println("LocalDateTime: ${myFormatDate(localDateTime)}")
+    println("Instant: ${myFormatDate(instant)}")
+    println("ZonedDateTime: ${myFormatDate(zonedDateTime)}")
+    println("OffsetDateTime: ${myFormatDate(offsetDateTime)}")
+
+    println("\nISO формат:")
+    println("LocalDate: ${isoFormatDate(localDate)}")
+    println("LocalTime: ${isoFormatDate(localTime)}")
+    println("LocalDateTime: ${isoFormatDate(localDateTime)}")
+    println("Instant: ${isoFormatDate(instant)}")
+    println("ZonedDateTime: ${isoFormatDate(zonedDateTime)}")
+    println("OffsetDateTime: ${isoFormatDate(offsetDateTime)}")
+
 
 //Создай объекты дат и / или времени которые мы изучили и по очереди передай их в метод созданный выше.
 //Не используй в них метод now()
