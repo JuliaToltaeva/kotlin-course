@@ -227,9 +227,27 @@ fun main() {
     identifyGeneration(LocalDate.of(2012, 12, 31))
 
 
-//Создай два объекта даты: 25 февраля 2023 года и 25 февраля 2024 года. Создай форматтер, который форматирует дату
-// в месяц и день.
+//Создай два объекта даты: 25 февраля 2023 года и 25 февраля 2024 года.
+//Создай форматтер, который форматирует дату в месяц и день.
 //Выведи первую отформатированную дату, прибавив к ней 10 дней.
 //Выведи вторую отформатированную дату, прибавив к ней 10 дней.
 //Найди отличия)))
+
+    println("\nЗадача 7")
+
+    val localData1 = LocalDate.of(2023, 2,25)
+    val localData2 = LocalDate.of(2024, 2,25)
+
+    val formatter = DateTimeFormatter.ofPattern(
+        "MM.dd"
+    )
+
+    val data1Plus10 = localData1.plusDays(10).format(formatter)
+    val data2Plus10 = localData2.plusDays(10).format(formatter)
+
+    println("Форматированная дата в формате мм.дд:")
+    println(data1Plus10)
+    println(data2Plus10)
+
+
 }
