@@ -94,25 +94,72 @@ fun main() {
     val zonedDateTime = ZonedDateTime.now()
     val offsetDateTime = OffsetDateTime.now()
 
-    println("Мой формат:")
-    println("LocalDate: ${myFormatDate(localDate)}")
-    println("LocalTime: ${myFormatDate(localTime)}")
-    println("LocalDateTime: ${myFormatDate(localDateTime)}")
-    println("Instant: ${myFormatDate(instant)}")
-    println("ZonedDateTime: ${myFormatDate(zonedDateTime)}")
-    println("OffsetDateTime: ${myFormatDate(offsetDateTime)}")
+    val listForPrint = listOf(
+        Pair("LocalDate", localDate),
+        Pair("LocalTime", localTime),
+        Pair("LocalDateTime", localDateTime),
+        Pair("Instant", instant),
+        Pair("ZonedDateTime", zonedDateTime),
+        Pair("OffsetDateTime", offsetDateTime)
+    )
 
-    println("\nISO формат:")
-    println("LocalDate: ${isoFormatDate(localDate)}")
-    println("LocalTime: ${isoFormatDate(localTime)}")
-    println("LocalDateTime: ${isoFormatDate(localDateTime)}")
-    println("Instant: ${isoFormatDate(instant)}")
-    println("ZonedDateTime: ${isoFormatDate(zonedDateTime)}")
-    println("OffsetDateTime: ${isoFormatDate(offsetDateTime)}")
+    println("Мой формат с использованием текущего времени:")
+
+    listForPrint.forEach { (key, value) ->
+        println("$key, ${myFormatDate(value)}")
+    }
+
+    println("\nISO формат с использованием текущего времени:")
+
+    listForPrint.forEach { (key, value) ->
+        println("$key, ${isoFormatDate(value)}")
+    }
 
 
 //Создай объекты дат и / или времени которые мы изучили и по очереди передай их в метод созданный выше.
 //Не используй в них метод now()
+
+    println("\nЗадача 5")
+
+    val localDate2 = LocalDate.of(
+        2025, 1, 1
+    )
+    val localTime2 = LocalTime.of(
+        1, 1, 1
+    )
+    val localDateTime2 = LocalDateTime.of(
+        2025, 1,1, 1, 1, 1
+    )
+    val zonedDateTime2 = ZonedDateTime.of(
+        localDateTime, ZoneId.of("Europe/Vatican")
+    )
+    val offsetDateTime2 = OffsetDateTime.of(
+        localDateTime, ZoneOffset.ofHours(3)
+    )
+
+    val instant2 = Instant.ofEpochSecond(123456789)
+
+    val listForPrint2 = listOf(
+        Pair("LocalDate", localDate2),
+        Pair("LocalTime", localTime2),
+        Pair("LocalDateTime", localDateTime2),
+        Pair("Instant", instant2),
+        Pair("ZonedDateTime", zonedDateTime2),
+        Pair("OffsetDateTime", offsetDateTime2)
+    )
+
+    println("Мой формат с использованием указанного времени:")
+
+    listForPrint2.forEach { (key, value) ->
+        println("$key, ${myFormatDate(value)}")
+    }
+
+    println("\nISO формат с использованием указанного времени:")
+
+    listForPrint2.forEach { (key, value) ->
+        println("$key, ${isoFormatDate(value)}")
+    }
+
 
 //Создайте функцию identifyGeneration, которая принимает дату рождения в формате LocalDate и печатает строку,
 //определяющую, к какому поколению принадлежит человек: "Бумер" для тех, кто родился с 1946 по 1964 год включительно,
