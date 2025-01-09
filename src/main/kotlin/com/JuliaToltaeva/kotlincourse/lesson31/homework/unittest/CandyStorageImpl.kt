@@ -2,10 +2,10 @@ package com.juliatoltaeva.com.JuliaToltaeva.kotlincourse.lesson31.homework.unitt
 
 // Пример имплементации интерфейса с блоком инициализации класса
 
-class CerealStorageImpl(
+class CandyStorageImpl(
     override val containerCapacity: Float,
     override val storageCapacity: Float
-) : CerealStorage {
+) : CandyStorage {
 
 
     // Блок инициализации класса. Выполняется сразу при создании объекта
@@ -18,36 +18,44 @@ class CerealStorageImpl(
         }
     }
 
-    private val storage = mutableMapOf<Cereal, Float>()
+    private val storage = mutableMapOf<Candy, Float>()
+    private var currentContainerAmount = 0f
 
     // дальше будет переопределением методов интерфейса
 
-    override fun addCereal(cereal: Cereal, amount: Float): Float {
+    fun getCandyTypes() = storage.keys.toList()
+
+    override fun addCandy(candy: Candy, amount: Float): Float {
+        require(amount >= 0) {
+            "Количество конфет не может быть отрицательным"
+        }
+        require(amount <= containerCapacity) {
+            "Количество конфет не может быть отрицательным"
+        }
+        val result = amount
+        return(result)
+        // вернули остаток места в контейнере
+    }
+
+    override fun getCandy(candy: Candy, amount: Float): Float {
         TODO("Not yet implemented")
     }
 
-    override fun getCereal(cereal: Cereal, amount: Float): Float {
+    override fun removeContainer(candy: Candy): Boolean {
+        return currentContainerAmount == 0f
+    }
+
+    override fun getAmount(candy: Candy): Float {
         TODO("Not yet implemented")
     }
 
-    override fun removeContainer(cereal: Cereal): Boolean {
-        TODO("Not yet implemented")
-    }
-
-    override fun getAmount(cereal: Cereal): Float {
-        TODO("Not yet implemented")
-    }
-
-    override fun getSpace(cereal: Cereal): Float {
+    override fun getSpace(candy: Candy): Float {
         TODO("Not yet implemented")
     }
 
     override fun toString(): String {
         TODO("Not yet implemented")
     }
-
-
-
 
 
 }
