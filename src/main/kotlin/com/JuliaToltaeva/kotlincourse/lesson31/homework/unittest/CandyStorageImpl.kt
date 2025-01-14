@@ -26,15 +26,22 @@ class CandyStorageImpl(
     fun getCandyTypes() = storage.keys.toList()
 
     override fun addCandy(candy: Candy, amount: Float): Float {
-        require(amount >= 0) {
-            "Количество конфет не может быть отрицательным"
+        if (amount < 0) {
+            throw IllegalArgumentException("Количество конфет не может быть отрицательным")
         }
-        require(amount <= containerCapacity) {
-            "Количество конфет не может быть отрицательным"
+
+        if(storageCapacity <= containerCapacity) {
+            throw IllegalStateException("Нет места для нового контейнера")
         }
-        val result = amount
-        return(result)
-        // вернули остаток места в контейнере
+
+        if (currentContainerAmount + amount > containerCapacity) {
+            val overflow = (currentContainerAmount + amount) - containerCapacity
+            currentContainerAmount = containerCapacity
+            return overflow
+        } else {
+            currentContainerAmount += amount // Добавляем конфеты в контейнер
+            return 0f
+        }
     }
 
     override fun getCandy(candy: Candy, amount: Float): Float {
