@@ -27,6 +27,8 @@ class CandyStorageImpl(
 
     override fun addCandy(candy: Candy, amount: Float): Float {
 
+        require(amount >= 0) { "Количество конфет не может быть отрицательным" }
+
         if (currentContainerAmount + amount > containerCapacity) {
             val overflow = (currentContainerAmount + amount) - containerCapacity
             currentContainerAmount = containerCapacity
