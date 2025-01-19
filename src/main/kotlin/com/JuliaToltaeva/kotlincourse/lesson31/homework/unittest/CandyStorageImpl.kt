@@ -26,26 +26,28 @@ class CandyStorageImpl(
     fun getCandyTypes() = storage.keys.toList()
 
     override fun addCandy(candy: Candy, amount: Float): Float {
-        if (amount < 0) {
-            throw IllegalArgumentException("Количество конфет не может быть отрицательным")
-        }
 
-        if(storageCapacity <= containerCapacity) {
-            throw IllegalStateException("Нет места для нового контейнера")
-        }
-
-        if (currentContainerAmount + amount > containerCapacity) {
+        return if (currentContainerAmount + amount > containerCapacity) {
             val overflow = (currentContainerAmount + amount) - containerCapacity
             currentContainerAmount = containerCapacity
-            return overflow
+            overflow
         } else {
-            currentContainerAmount += amount // Добавляем конфеты в контейнер
-            return 0f
+            currentContainerAmount += amount
+            0f
         }
     }
 
     override fun getCandy(candy: Candy, amount: Float): Float {
-        TODO("Not yet implemented")
+
+        return if (currentContainerAmount < amount) {
+            val remaining = currentContainerAmount
+            currentContainerAmount = 0f
+            remaining
+        } else {
+            currentContainerAmount -= amount
+            amount
+        }
+
     }
 
     override fun removeContainer(candy: Candy): Boolean {
@@ -53,15 +55,17 @@ class CandyStorageImpl(
     }
 
     override fun getAmount(candy: Candy): Float {
-        TODO("Not yet implemented")
+        return currentContainerAmount
     }
 
     override fun getSpace(candy: Candy): Float {
-        TODO("Not yet implemented")
+        val availableSpace = containerCapacity - currentContainerAmount
+        return if (availableSpace > 0) availableSpace else 0f
     }
 
     override fun toString(): String {
-        TODO("Not yet implemented")
+        return "containerCapacity = $containerCapacity, " +
+                "currentContainerAmount = $currentContainerAmount"
     }
 
 
