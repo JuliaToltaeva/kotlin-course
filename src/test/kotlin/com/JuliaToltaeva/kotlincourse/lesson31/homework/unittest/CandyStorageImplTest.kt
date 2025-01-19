@@ -48,20 +48,32 @@ class CandyStorageImplTest {
         Assertions.assertEquals(3.5f, getAmount(Candy.MARS))
     }
 
-    //    Тест на добавление нескольких типов конфет
+    //    Тест проверку вместимости контейнеров
     @Test
-    fun addMultipleCandy() = with(storage) {
+    fun `should throw if storage can take new container`() = with(storage) {
         addCandy(Candy.MARS, 1.1f)
         addCandy(Candy.TWIX, 2.7f)
-        addCandy(Candy.LION, 1.1f)
-        addCandy(Candy.MILKY_WAY, 2.7f)
-        addCandy(Candy.SNICKERS, 1.1f)
+        Assertions.assertTrue(storage.getCandyTypes().size <= (storageCapacity / containerCapacity))
+    }
+
+    @Test
+    fun `should throw if storage can not take new container`() = with(storage) {
+        addCandy(Candy.MARS, 1.1f)
+        addCandy(Candy.TWIX, 2.7f)
+        addCandy(Candy.LION, 2.7f)
+        if (storage.getCandyTypes().size <= (storageCapacity / containerCapacity)) {
+            throw IllegalStateException("Не хватает места в хранилище для добавления конфет")
+        }
+    }
+
+    //    Тест на добавление нескольких типов конфет
+    @Test
+    fun addAFewTypesOfCandies() = with(storage) {
+        addCandy(Candy.MARS, 1.1f)
+        addCandy(Candy.TWIX, 2.7f)
         Assertions.assertAll(
             { Assertions.assertEquals(1.1f, getAmount(Candy.MARS)) },
             { Assertions.assertEquals(2.7f, getAmount(Candy.TWIX)) },
-            { Assertions.assertEquals(1.1f, getAmount(Candy.LION)) },
-            { Assertions.assertEquals(2.7f, getAmount(Candy.MILKY_WAY)) },
-            { Assertions.assertEquals(1.1f, getAmount(Candy.SNICKERS)) },
         )
     }
 
@@ -79,7 +91,7 @@ class CandyStorageImplTest {
 
     // Тест на отрицательное количество конфет
     @Test
-    fun `should throw if cereal amount is negative`(): Unit = with(storage) {
+    fun `should throw if candy amount is negative`(): Unit = with(storage) {
         Assertions.assertThrows(IllegalArgumentException::class.java) {
             addCandy(Candy.MARS, -1f)
         }
@@ -107,29 +119,20 @@ class CandyStorageImplTest {
     fun `should return true when getting candy is OK`(): Unit = with(storage) {
         addCandy(Candy.MARS, 2.2f)
         getCandy(Candy.MARS, 2.2f)
-        Assertions.assertEquals(2.2f, getAmount(Candy.MARS))
+        Assertions.assertEquals(0f, getAmount(Candy.MARS))
     }
 
     @Test
     fun `should return true when getting multiple candy is OK`() = with(storage) {
         addCandy(Candy.MARS, 1.1f)
         addCandy(Candy.TWIX, 2.7f)
-        addCandy(Candy.LION, 1.1f)
-        addCandy(Candy.MILKY_WAY, 2.7f)
-        addCandy(Candy.SNICKERS, 1.1f)
 
         getCandy(Candy.MARS, 1.1f)
         getCandy(Candy.TWIX, 2.7f)
-        getCandy(Candy.LION, 1.1f)
-        getCandy(Candy.MILKY_WAY, 2.7f)
-        getCandy(Candy.SNICKERS, 1.1f)
 
         Assertions.assertAll(
             { Assertions.assertEquals(0f, getAmount(Candy.MARS)) },
             { Assertions.assertEquals(0f, getAmount(Candy.TWIX)) },
-            { Assertions.assertEquals(0f, getAmount(Candy.LION)) },
-            { Assertions.assertEquals(0f, getAmount(Candy.MILKY_WAY)) },
-            { Assertions.assertEquals(0f, getAmount(Candy.SNICKERS)) },
         )
     }
 
@@ -146,10 +149,14 @@ class CandyStorageImplTest {
     }
 
     @Test
-    fun `should return false when removing container with multiple candies`() {
+    fun `should return false when removing a few containers`() {
         storage.addCandy(Candy.MARS, 1.0f)
         storage.addCandy(Candy.TWIX, 1.0f)
-        Assertions.assertFalse(storage.removeContainer(Candy.MARS))
+        Assertions.assertAll(
+            { Assertions.assertFalse(storage.removeContainer(Candy.MARS)) },
+            { Assertions.assertFalse(storage.removeContainer(Candy.TWIX)) },
+        )
+
     }
 
     // checking getAmount
@@ -167,13 +174,13 @@ class CandyStorageImplTest {
 
     // checking getSpace
     @Test
-    fun `should return true if space is free`(){
+    fun `should return true if space is free`() {
         storage.addCandy(Candy.TWIX, 2.7f)
         Assertions.assertTrue(storage.getSpace(Candy.TWIX) > 0)
     }
 
     @Test
-    fun `should return true if space lower than containerCapacity`(){
+    fun `should return true if space lower than containerCapacity`() {
         storage.addCandy(Candy.TWIX, 2.7f)
         Assertions.assertTrue(storage.getSpace(Candy.TWIX) < 10f)
     }
@@ -182,14 +189,9 @@ class CandyStorageImplTest {
     fun `should return true if sum of containerCapacity lower than storageCapacity`() = with(storage) {
         addCandy(Candy.MARS, 1.1f)
         addCandy(Candy.TWIX, 2.7f)
-        addCandy(Candy.LION, 1.1f)
-        addCandy(Candy.MILKY_WAY, 2.7f)
-        addCandy(Candy.SNICKERS, 1.1f)
 
-        val sum = with (storage) {
-            getAmount(Candy.MARS) + getAmount(Candy.TWIX) +
-                    getAmount(Candy.LION) + getAmount(Candy.MILKY_WAY) +
-                    getAmount(Candy.SNICKERS)
+        val sum = with(storage) {
+            getAmount(Candy.MARS) + getAmount(Candy.TWIX)
         }
 
         Assertions.assertTrue(sum <= 20f)

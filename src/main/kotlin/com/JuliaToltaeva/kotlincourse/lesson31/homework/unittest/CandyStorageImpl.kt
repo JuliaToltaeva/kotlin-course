@@ -27,13 +27,16 @@ class CandyStorageImpl(
 
     override fun addCandy(candy: Candy, amount: Float): Float {
 
-        return if (currentContainerAmount + amount > containerCapacity) {
+        if (currentContainerAmount + amount > containerCapacity) {
             val overflow = (currentContainerAmount + amount) - containerCapacity
             currentContainerAmount = containerCapacity
-            overflow
+
+            storage[candy] = (storage[candy] ?: 0f) + (amount - overflow)
+            return overflow
         } else {
             currentContainerAmount += amount
-            0f
+            storage[candy] = (storage[candy] ?: 0f) + amount
+            return 0f
         }
     }
 
@@ -42,20 +45,26 @@ class CandyStorageImpl(
         return if (currentContainerAmount < amount) {
             val remaining = currentContainerAmount
             currentContainerAmount = 0f
-            remaining
+            storage[candy] = (storage[candy] ?: 0f) - remaining
+            return remaining
         } else {
             currentContainerAmount -= amount
-            amount
+            storage[candy] = (storage[candy] ?: 0f) - amount
+            return amount
         }
 
     }
 
     override fun removeContainer(candy: Candy): Boolean {
-        return currentContainerAmount == 0f
+        return if (currentContainerAmount == 0f) {
+            storage.remove(candy) != null
+        } else {
+            false
+        }
     }
 
     override fun getAmount(candy: Candy): Float {
-        return currentContainerAmount
+        return storage[candy] ?: 0f
     }
 
     override fun getSpace(candy: Candy): Float {
