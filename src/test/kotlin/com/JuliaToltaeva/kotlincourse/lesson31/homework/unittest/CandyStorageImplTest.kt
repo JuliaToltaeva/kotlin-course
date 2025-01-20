@@ -21,7 +21,7 @@ class CandyStorageImplTest {
     @Test
     fun `should throw if storageCapacity is lower than containerCapacity`() {
         Assertions.assertThrows(IllegalArgumentException::class.java) {
-            CandyStorageImpl(19f, 20f)
+            CandyStorageImpl(20f, 19f)
         }
     }
 
@@ -57,10 +57,10 @@ class CandyStorageImplTest {
     }
 
     @Test
-    fun `should throw if storage can not take new container`() = with(storage) {
+    fun `should throw if storage can not take new container`(): Unit = with(storage) {
         addCandy(Candy.MARS, 1.1f)
         addCandy(Candy.TWIX, 2.7f)
-        addCandy(Candy.LION, 2.7f)
+        addCandy(Candy.SNICKERS, 2.7f)
         if (storage.getCandyTypes().size <= (storageCapacity / containerCapacity)) {
             throw IllegalStateException("Не хватает места в хранилище для добавления конфет")
         }
@@ -85,31 +85,29 @@ class CandyStorageImplTest {
 
     // Тест на возвращение остатка, если добавляемое количество превышает оставшееся место
     @Test
-    fun `should return rest if added cereal is biggest than container empty space`() = with(storage) {
+    fun `should return rest if added candy is biggest than container empty space`() = with(storage) {
         Assertions.assertEquals(0.1f, addCandy(Candy.MILKY_WAY, 10.1f), 0.01f)
     }
 
     // Тест на отрицательное количество конфет
     @Test
-    fun `should throw if candy amount is negative`(): Unit = with(storage) {
+    fun `should throw if adding candy amount is negative`(): Unit = with(storage) {
         Assertions.assertThrows(IllegalArgumentException::class.java) {
             addCandy(Candy.MARS, -1f)
         }
     }
 
-    // Тест на недостаток места для нового контейнера:
     @Test
-    fun `should throw when storage don't have space for new container`(): Unit = with(storage) {
-        addCandy(Candy.MARS, 0.1f)
-        addCandy(Candy.MILKY_WAY, 0.1f)
-        Assertions.assertThrows(IllegalStateException::class.java) {
-            addCandy(Candy.TWIX, 0.1f)
+    fun `should throw if getting after adding candy amount is negative`(): Unit = with(storage) {
+        Assertions.assertThrows(IllegalArgumentException::class.java) {
+            addCandy(Candy.MARS, -1f)
+            getCandy(Candy.MARS, -1f)
         }
     }
 
     // getCandy
     @Test
-    fun `should throw if amount is negative`(): Unit = with(storage) {
+    fun `should throw if getting amount is negative`(): Unit = with(storage) {
         Assertions.assertThrows(IllegalArgumentException::class.java) {
             getCandy(Candy.MARS, -1f)
         }
@@ -139,11 +137,12 @@ class CandyStorageImplTest {
     // check removeContainer
     @Test
     fun `should return true when container is empty`() {
+        storage.addCandy(Candy.MARS, 0f)
         Assertions.assertTrue(storage.removeContainer(Candy.MARS))
     }
 
     @Test
-    fun `should return false when container is not empty`() {
+    fun `should return false when container is full`() {
         storage.addCandy(Candy.MARS, 2.7f)
         Assertions.assertFalse(storage.removeContainer(Candy.MARS))
     }

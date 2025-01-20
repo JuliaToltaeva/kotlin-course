@@ -14,7 +14,7 @@ class CandyStorageImpl(
             "Ёмкость контейнера не может быть отрицательной"
         }
         require(storageCapacity >= containerCapacity) {
-            "Ёмкость хранилища не должна быть меньше ёмкости одного контейнера"
+            "Ёмкость хранилища должна быть больше или равна ёмкости одного контейнера"
         }
     }
 
@@ -44,7 +44,9 @@ class CandyStorageImpl(
 
     override fun getCandy(candy: Candy, amount: Float): Float {
 
-        return if (currentContainerAmount < amount) {
+        require(amount >= 0) { "Количество конфет не может быть отрицательным" }
+
+        if (currentContainerAmount < amount) {
             val remaining = currentContainerAmount
             currentContainerAmount = 0f
             storage[candy] = (storage[candy] ?: 0f) - remaining
