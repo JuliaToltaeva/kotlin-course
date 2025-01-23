@@ -16,18 +16,34 @@ class CandyStorageImpl(
         require(storageCapacity >= containerCapacity) {
             "Ёмкость хранилища должна быть больше или равна ёмкости одного контейнера"
         }
+
     }
+
 
     private val storage = mutableMapOf<Candy, Float>()
     private var currentContainerAmount = 0f
+
+    private val getStorageCandies = getAmount(Candy.MARS) +
+            getAmount(Candy.MARS) +
+            getAmount(Candy.TWIX) +
+            getAmount(Candy.LION) +
+            getAmount(Candy.MILKY_WAY) +
+            getAmount(Candy.SNICKERS)
 
     // дальше будет переопределением методов интерфейса
 
     fun getCandyTypes() = storage.keys.toList()
 
+    fun getSpaceStorage(): Boolean {
+        val availableSpaceStorage = storageCapacity - getStorageCandies
+        return availableSpaceStorage > 0
+    }
+
     override fun addCandy(candy: Candy, amount: Float): Float {
 
         require(amount >= 0) { "Количество конфет не может быть отрицательным" }
+
+        if (!getSpaceStorage()) {throw IllegalStateException("Недостаточно места в контейнере для добавления конфет")}
 
         if (currentContainerAmount + amount > containerCapacity) {
             val overflow = (currentContainerAmount + amount) - containerCapacity
@@ -40,6 +56,7 @@ class CandyStorageImpl(
             storage[candy] = (storage[candy] ?: 0f) + amount
             return 0f
         }
+
     }
 
     override fun getCandy(candy: Candy, amount: Float): Float {

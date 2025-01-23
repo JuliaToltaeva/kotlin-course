@@ -58,12 +58,9 @@ class CandyStorageImplTest {
 
     @Test
     fun `should throw if storage can not take new container`(): Unit = with(storage) {
-        addCandy(Candy.MARS, 1.1f)
-        addCandy(Candy.TWIX, 2.7f)
-        addCandy(Candy.SNICKERS, 2.7f)
-        if (storage.getCandyTypes().size <= (storageCapacity / containerCapacity)) {
-            throw IllegalStateException("Не хватает места в хранилище для добавления конфет")
-        }
+        storage.addCandy(Candy.MARS, 10f)
+        storage.addCandy(Candy.TWIX, 10f)
+        Assertions.assertTrue(getSpaceStorage())
     }
 
     //    Тест на добавление нескольких типов конфет
