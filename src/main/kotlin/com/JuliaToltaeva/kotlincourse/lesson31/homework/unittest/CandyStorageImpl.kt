@@ -1,5 +1,8 @@
 package com.juliatoltaeva.com.JuliaToltaeva.kotlincourse.lesson31.homework.unittest
 
+import com.juliatoltaeva.com.JuliaToltaeva.kotlincourse.lesson12.getMax
+import kotlin.math.min
+
 // Пример имплементации интерфейса с блоком инициализации класса
 
 class CandyStorageImpl(
@@ -21,63 +24,74 @@ class CandyStorageImpl(
 
 
     private val storage = mutableMapOf<Candy, Float>()
-    private var currentContainerAmount = 0f
 
-    private val getStorageCandies = getAmount(Candy.MARS) +
-            getAmount(Candy.MARS) +
-            getAmount(Candy.TWIX) +
-            getAmount(Candy.LION) +
-            getAmount(Candy.MILKY_WAY) +
-            getAmount(Candy.SNICKERS)
 
     // дальше будет переопределением методов интерфейса
 
     fun getCandyTypes() = storage.keys.toList()
 
-    fun getSpaceStorage(): Boolean {
-        val availableSpaceStorage = storageCapacity - getStorageCandies
-        return availableSpaceStorage > 0
-    }
-
-    override fun addCandy(candy: Candy, amount: Float): Float {
+    private fun checkSpaceStorage(amount: Float) {
 
         require(amount >= 0) { "Количество конфет не может быть отрицательным" }
 
-        if (!getSpaceStorage()) {throw IllegalStateException("Недостаточно места в контейнере для добавления конфет")}
+        val availableMaxSpaceStorage = (getCandyTypes().size + 2) * containerCapacity
 
-        if (currentContainerAmount + amount > containerCapacity) {
-            val overflow = (currentContainerAmount + amount) - containerCapacity
-            currentContainerAmount = containerCapacity
-
-            storage[candy] = (storage[candy] ?: 0f) + (amount - overflow)
-            return overflow
-        } else {
-            currentContainerAmount += amount
-            storage[candy] = (storage[candy] ?: 0f) + amount
-            return 0f
+        if (availableMaxSpaceStorage <= 0) {
+            throw IllegalStateException("Недостаточно места в хранилище для добавления конфет")
         }
 
     }
 
+    private fun checkSpaceContainer(amount: Float, candy: Candy) {
+
+        val currentAmountContainer = storage[candy] ?: 0f
+        val availableSpaceContainer = containerCapacity - currentAmountContainer
+
+        if (availableSpaceContainer <= 0) {
+            throw IllegalStateException("Недостаточно места в контейнере для добавления конфет")
+        }
+    }
+
+    override fun addCandy(candy: Candy, amount: Float): Float {
+
+        checkSpaceStorage(amount)
+        checkSpaceContainer(amount, candy)
+
+        val availableSpaceContainer = containerCapacity - getAmount(candy)
+        val currentContainerAmount = getAmount(candy)
+
+        if (amount <= availableSpaceContainer) {
+            storage[candy] = currentContainerAmount + amount
+            return 0f
+        } else {
+            val overflow = amount - availableSpaceContainer
+            storage[candy] = containerCapacity
+            return overflow
+        }
+
+    }
+
+
     override fun getCandy(candy: Candy, amount: Float): Float {
 
         require(amount >= 0) { "Количество конфет не может быть отрицательным" }
+        require(amount <= getAmount(candy)) { "Количество конфет не может быть взято больше, чем есть в контейнере" }
 
-        if (currentContainerAmount < amount) {
-            val remaining = currentContainerAmount
-            currentContainerAmount = 0f
-            storage[candy] = (storage[candy] ?: 0f) - remaining
-            return remaining
+
+        val currentAmountContainer = storage[candy] ?: 0f
+
+        if (currentAmountContainer < amount) {
+            storage[candy] = currentAmountContainer - amount
+            return currentAmountContainer
         } else {
-            currentContainerAmount -= amount
-            storage[candy] = (storage[candy] ?: 0f) - amount
+            storage[candy] = currentAmountContainer - amount
             return amount
         }
 
     }
 
     override fun removeContainer(candy: Candy): Boolean {
-        return if (currentContainerAmount == 0f) {
+        return if (storage[candy]!! == 0f) {
             storage.remove(candy) != null
         } else {
             false
@@ -89,13 +103,13 @@ class CandyStorageImpl(
     }
 
     override fun getSpace(candy: Candy): Float {
-        val availableSpace = containerCapacity - currentContainerAmount
-        return if (availableSpace > 0) availableSpace else 0f
+        val currentContainerAmount = storage[candy] ?: 0f
+        val availableSpaceContainer = containerCapacity - currentContainerAmount
+        return if (availableSpaceContainer > 0) availableSpaceContainer else 0f
     }
 
     override fun toString(): String {
-        return "containerCapacity = $containerCapacity, " +
-                "currentContainerAmount = $currentContainerAmount"
+        return "containerCapacity = $containerCapacity"
     }
 
 
