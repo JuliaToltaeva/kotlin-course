@@ -58,10 +58,10 @@ class CandyStorageImplTest {
 
     @Test
     fun `should throw if storage can not take new container`(): Unit = with(storage) {
-        val storage = CandyStorageImpl(10f, 10f)
         storage.addCandy(Candy.MARS, 10f)
+        storage.addCandy(Candy.LION, 10f)
         Assertions.assertThrows(IllegalStateException::class.java) {
-            storage.addCandy(Candy.LION, 10f)
+            storage.addCandy(Candy.SNICKERS, 10f)
         }
     }
 

@@ -2,5 +2,6 @@ package com.juliatoltaeva.com.JuliaToltaeva.kotlincourse.lesson31.homework.unitt
 
 enum class Candy(local: String) {
     MARS("Марс"),
-    LION("Лёвушка")
+    LION("Лёвушка"),
+    SNICKERS("Сникерс")
 }
